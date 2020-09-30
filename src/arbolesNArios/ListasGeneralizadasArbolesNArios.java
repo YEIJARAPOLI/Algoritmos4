@@ -14,22 +14,23 @@ public class ListasGeneralizadasArbolesNArios {
     
     public static void main(String[] args) {
         ArbolNArio arbol = new ArbolNArio();
-        //Insertar Arbol
-        //arbol.mostrarArbol(crearArbol(arbol));
+        
         String menu = TITLE_MENU
-                + "\n1. Insertar Árbol - OK"
-                + "\n2. Mostrar Arbol - OK"
-                + "\n3. Eliminar - OK"
-                + "\n4. Buscar Dato - OK"
-                + "\n5. Mostrar Raíces - OK "
-                + "\n6. Mostrar Hojas - OK"
-                + "\n7. Mostrar Grado Arbol - OK"
-                + "\n8. Mostrar Grado Dato Dado - OK "
-                + "\n9. Mostrar Hijos Dato Dado - OK"
-                + "\n10. Mostrar Nivel - OK"
-                + "\n11. Mostrar Altura - OK"
-                + "\n12. Mostrar Padre Dato Dato - OK"
-                + "\n0. SALIR";
+                + "\n"
+                + "\n  1. Insertar Árbol"
+                + "\n  2. Mostrar Arbol"
+                + "\n  3. Eliminar"
+                + "\n  4. Buscar Dato"
+                + "\n  5. Mostrar Raíces"
+                + "\n  6. Mostrar Hojas"
+                + "\n  7. Mostrar Grado Arbol"
+                + "\n  8. Mostrar Grado Dato Dado"
+                + "\n  9. Mostrar Hijos Dato Dado"
+                + "\n10. Mostrar Nivel"
+                + "\n11. Mostrar Altura"
+                + "\n12. Mostrar Padre Dato Dato"
+                + "\n"
+                + "\n  0. SALIR";
         int opcion;
         String dato;
         
@@ -151,7 +152,7 @@ public class ListasGeneralizadasArbolesNArios {
                 default:JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);
                     break;
             }
-        }while(opcion != 0);
+        } while(opcion != 0);
     }
     
     public static boolean isArbolVacio(NodoArbolNArio arbol){
@@ -161,7 +162,7 @@ public class ListasGeneralizadasArbolesNArios {
         return true;
     }
     
-    public static NodoArbolNArio crearArbol(ArbolNArio arbol){
+    public NodoArbolNArio crearArbol(ArbolNArio arbol){
         arbol.setRaiz(new NodoArbolNArio("X"));
         arbol.getRaiz().setLiga(new NodoArbolNArio(null));
         arbol.getRaiz().getLiga().setLigaLista(new NodoArbolNArio("C"));
