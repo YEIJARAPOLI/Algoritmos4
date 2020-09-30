@@ -14,6 +14,8 @@ public class ListasGeneralizadasArbolesNArios {
     
     public static void main(String[] args) {
         ArbolNArio arbol = new ArbolNArio();
+        //Insertar Arbol
+        //arbol.mostrarArbol(crearArbol(arbol));
         String menu = TITLE_MENU
                 + "\n1. Insertar Árbol - OK"
                 + "\n2. Mostrar Arbol - OK"
@@ -21,7 +23,7 @@ public class ListasGeneralizadasArbolesNArios {
                 + "\n4. Buscar Dato - OK"
                 + "\n5. Mostrar Raíces - OK "
                 + "\n6. Mostrar Hojas - OK"
-                + "\n7. Mostrar Grado Arbol"
+                + "\n7. Mostrar Grado Arbol - OK"
                 + "\n8. Mostrar Grado Dato Dado - OK "
                 + "\n9. Mostrar Hijos Dato Dado - OK"
                 + "\n10. Mostrar Nivel - OK"
@@ -49,10 +51,10 @@ public class ListasGeneralizadasArbolesNArios {
                     break;
                 //Mostrar arbol
                 case 2:
-                    if(arbol.getRaiz() != null ){
-                        arbol.mostrarArbol(arbol.getRaiz());
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Arbol está Vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);    
                     }else{
-                        JOptionPane.showMessageDialog(null, "¡El Arbol está Vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                        arbol.mostrarArbol(arbol.getRaiz());
                     }
                     break;
                 //Eliminar
@@ -68,45 +70,80 @@ public class ListasGeneralizadasArbolesNArios {
                     break;
                 //Mostrar Raices
                 case 5:
-                    arbol.mostrarRaices(arbol.getRaiz());
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Arbol está Vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);    
+                    }else{
+                        arbol.mostrarRaices(arbol.getRaiz());
+                    }
                     break;
                 //Mostrar Hojas
                 case 6:
-                    arbol.mostrarHojas(arbol.getRaiz());
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Arbol está Vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);    
+                    }else{
+                        arbol.mostrarHojas(arbol.getRaiz());
+                    }
                     break;
                 //Mostrar Grado Arbol
                 case 7:
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Árbol está vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                    }else{
+                        int gradoArbol = arbol.mostrarGradoArbol(arbol.getRaiz());
+                        JOptionPane.showMessageDialog(null, "El grado del Árbol es "+gradoArbol+".");
+                        break;
+                    }
                     break;
                 //Mostrar Grado Dato Dado
-                case 8:                  
-                    String datoDadoGetGrado;
-                    datoDadoGetGrado = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle el grado", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
-                    arbol.mostrarGradoDatoDado(arbol.getRaiz(), datoDadoGetGrado);
+                case 8:   
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Arbol está Vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);    
+                    }else{
+                        String datoDadoGetGrado;
+                        datoDadoGetGrado = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle el grado", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                        arbol.mostrarGradoDatoDado(arbol.getRaiz(), datoDadoGetGrado);
+                    }
                     break; 
                 //Mostrar Hijos Dato Dado 
                 case 9:
                     String datoDadoGetHijos;
-                    datoDadoGetHijos = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle los hijos", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
-                    arbol.mostrarHijosDatoDado(arbol.getRaiz(), datoDadoGetHijos);
-                    break;    
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Árbol está vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                    }else{
+                        datoDadoGetHijos = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle los hijos", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);                        
+                        arbol.mostrarHijosDatoDado(arbol.getRaiz(), datoDadoGetHijos);    
+                    }
+                    break;   
                 //Mostrar Nivel
                 case 10:
-                    Integer nivel = 1;
-                    dato = JOptionPane.showInputDialog(null, "Ingrese el dato a calcularle el nivel", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
-                    nivel = arbol.mostrarNivel(arbol.getRaiz(), dato, 1);
-                    System.out.println("El nivel del dato '" + dato + "' en el arbol es :: " + nivel);
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Árbol está vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                    }else{
+                        Integer nivel = 1;
+                        dato = JOptionPane.showInputDialog(null, "Ingrese el dato a calcularle el nivel", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                        nivel = arbol.mostrarNivel(arbol.getRaiz(), dato, 1);
+                        JOptionPane.showMessageDialog(null, "El nivel del Nodo '" + dato + "' en el Árbol es " + nivel+".");
+                    }
                     break;
                 //Mostrar Altura
                 case 11:
-                    Integer altura = 1;
-                    altura = arbol.mostrarAltura(arbol.getRaiz());
-                    System.out.println("La altura del arbol es :: " + altura);
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Árbol está vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                    }else{
+                        Integer altura = 1;
+                        altura = arbol.mostrarAltura(arbol.getRaiz());
+                        JOptionPane.showMessageDialog(null, "La altura del Árbol es "+altura+".");
+                    }
                     break;
                 //Mostrar Padre Dato Dato
                 case 12:
                     String datoDadoGetPadre;
-                    datoDadoGetPadre = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle el padre", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
-                    arbol.mostrarPadreDatoDado(arbol.getRaiz(), datoDadoGetPadre);
+                    if(isArbolVacio(arbol.getRaiz())){
+                        JOptionPane.showMessageDialog(null, "¡El Árbol está vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE); 
+                    }else {
+                        datoDadoGetPadre = JOptionPane.showInputDialog(null, "Ingrese el dato del Nodo a buscarle el padre", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                        arbol.mostrarPadreDatoDado(arbol.getRaiz(), datoDadoGetPadre, null, false);                    
+                    }
                     break; 
                 case 0:
                     System.exit(0);
@@ -115,5 +152,37 @@ public class ListasGeneralizadasArbolesNArios {
                     break;
             }
         }while(opcion != 0);
+    }
+    
+    public static boolean isArbolVacio(NodoArbolNArio arbol){
+        if(arbol != null){
+            return false;
+        }
+        return true;
+    }
+    
+    public static NodoArbolNArio crearArbol(ArbolNArio arbol){
+        arbol.setRaiz(new NodoArbolNArio("X"));
+        arbol.getRaiz().setLiga(new NodoArbolNArio(null));
+        arbol.getRaiz().getLiga().setLigaLista(new NodoArbolNArio("C"));
+        arbol.getRaiz().getLiga().getLigaLista().setLiga(new NodoArbolNArio("D"));
+        arbol.getRaiz().getLiga().getLigaLista().getLiga().setLiga(new NodoArbolNArio("E"));
+        
+        arbol.getRaiz().getLiga().setLiga(new NodoArbolNArio("F"));
+        
+        arbol.getRaiz().getLiga().getLiga().setLiga(new NodoArbolNArio(null));
+        arbol.getRaiz().getLiga().getLiga().getLiga().setLigaLista(new NodoArbolNArio("H"));
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().setLiga(new NodoArbolNArio("W"));
+        
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().setLiga(new NodoArbolNArio(null));
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().setLigaLista(new NodoArbolNArio("G"));
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().getLigaLista().setLiga(new NodoArbolNArio("Z"));
+        
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().setLiga(new NodoArbolNArio("K"));
+        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().getLiga().setLiga(new NodoArbolNArio("M"));
+        
+        arbol.getRaiz().getLiga().getLiga().getLiga().setLiga(new NodoArbolNArio("S"));
+
+        return arbol.getRaiz();
     }
 }

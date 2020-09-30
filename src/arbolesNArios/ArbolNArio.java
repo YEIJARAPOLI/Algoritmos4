@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  */
 public class ArbolNArio {
     NodoArbolNArio raiz;
+    int gradoFinalArbol = 1;
     boolean registroEliminado = false;
     
     //Variable tipo text para el nombre del MENÚ
@@ -41,7 +42,9 @@ public class ArbolNArio {
     * Método para Insertar un Nodo
     * @author leonChanci
     * @since 16/09/2020
+    * @param p Objet tipo NodoArbolNArio
     * @param dato Dato a Insertar
+    * @return nuevoNodo
     */
     public NodoArbolNArio insertNodo(NodoArbolNArio p, String dato){
         NodoArbolNArio nuevoNodo = null;
@@ -57,7 +60,7 @@ public class ArbolNArio {
     * @since 18/09/2020
     * @param p NodoArbolNArio
     * @param dato Nodo a buscar para insertar
-    * @param datoBuscar 
+    * @param datoBuscar Dato a buscar para insertar
     */
     public void insertarArbol(NodoArbolNArio p, String dato, String datoBuscar){
         NodoArbolNArio q = p;
@@ -214,7 +217,7 @@ public class ArbolNArio {
     }
 
    /**
-    * Método para mostrar las raíces del árbol
+    * Método para mostrar las raíces del Árbol
     * @author leonChanci
     * @since 25/09/2020
     * @param p Objet tipo NodoArbolNArio 
@@ -233,8 +236,8 @@ public class ArbolNArio {
         }
     }
     
-    /**
-    * Método para mostrar las hojas del árbol
+   /**
+    * Método para mostrar las hojas del Árbol
     * @author leonChanci
     * @since 25/09/2020
     * @param p Objet tipo NodoArbolNArio 
@@ -253,26 +256,35 @@ public class ArbolNArio {
         }
     }
     
-    public void mostrarGradoArbol(NodoArbolNArio p){
-//        int gradoNodo = 0;
-//        NodoArbolNArio q = p, auxiliar;
-//        
-//        while(q != null){ 
-//            if(q.isSw() == false && q.getDato().equals(dato)){
-//                if(q == p){
-//                    auxiliar = q.getLiga();
-//                    while(auxiliar != null){
-//                        gradoNodo++;
-//                    auxiliar = auxiliar.getLiga();
-//                    }         
-//                }     
-//                JOptionPane.showMessageDialog(null, "El grado del Nodo \'"+dato+"\' es "+gradoNodo+".");
-//                return;
-//            }else{
-//                mostrarGradoDatoDado(q.getLigaLista(), dato);
-//            }
-//            q = q.getLiga();
-//        }
+   /**
+    * Método para mostrar el grado del Árbol
+    * @author leonChanci
+    * @since 30/09/2020
+    * @param p Objet tipo NodoArbolNArio 
+    */
+    public int mostrarGradoArbol(NodoArbolNArio p){
+        int gradoNodo = 0;
+        NodoArbolNArio q = p, auxiliar;
+        
+        while(q != null){ 
+            if(q.isSw() == false){
+                if(q == p){
+                    auxiliar = q.getLiga();
+                    while(auxiliar != null){
+                        gradoNodo++;     
+                    auxiliar = auxiliar.getLiga();
+                    }     
+                    if(gradoNodo > gradoFinalArbol){
+                        gradoFinalArbol = gradoNodo;
+                    }
+                } 
+            }else{
+                mostrarGradoArbol(q.getLigaLista());
+                
+            }
+            q = q.getLiga();
+        }
+        return gradoFinalArbol;
     } 
     
    /**
@@ -280,7 +292,7 @@ public class ArbolNArio {
     * @author leonChanci
     * @since 11/09/2020
     * @param p Objet tipo NodoArbolNArio
-    * @param dato Dato del Nodo buscarle el grad 
+    * @param dato Dato del Nodo buscarle el grado
     */
     public void mostrarGradoDatoDado(NodoArbolNArio p, String dato){
         NodoArbolNArio q = p;
@@ -309,7 +321,7 @@ public class ArbolNArio {
     * @author leonChanci
     * @since 25/09/2020
     * @param p Objet tipo NodoArbolNArio
-    * @param dato Dato del Nodo buscarle el grad 
+    * @param dato Dato del Nodo buscarle los hijos
     */
     public void mostrarHijosDatoDado(NodoArbolNArio p, String dato){
         NodoArbolNArio q = p;
@@ -319,7 +331,7 @@ public class ArbolNArio {
                 if(q == p){
                     auxiliar = q.getLiga();
                     while(auxiliar != null){
-                        if(auxiliar.getDato().equals("")){
+                        if(auxiliar.getDato() == null){
                             System.out.print(auxiliar.getLigaLista().getDato()+ ",  "); 
                         }else{
                             System.out.print(auxiliar.getDato()+ ",  ");  
@@ -391,31 +403,48 @@ public class ArbolNArio {
     }
  
    /**
-    * Método mostrar el apdre de un dato(Nodo) dado
+    * Método mostrar el padre de un dato(Nodo) dado
     * @author leonChanci
     * @since 25/09/2020
     * @param p Objet tipo NodoArbolNArio
-    * @param dato Dato del Nodo buscarle el grad 
+    * @param dato Dato del Nodo buscarle el padre
+    * @param anterior Dato del Nodo buscarle el padre
+    * @param sw Dato del Nodo buscarle el padre
+    * @return sw
     */
-    public void mostrarPadreDatoDado(NodoArbolNArio p, String dato){
-        NodoArbolNArio q = p;
-        NodoArbolNArio auxiliar, anterior = null;
+    public boolean mostrarPadreDatoDado(NodoArbolNArio p, String dato, NodoArbolNArio anterior, boolean sw){
+        NodoArbolNArio q = p, auxiliar;
         while(q != null){ 
             if(q.isSw() == false && q.getDato().equals(dato)){
-                if(q == p){
-                    auxiliar = q.getLiga();
-                    while(auxiliar != null){   
-                    auxiliar = auxiliar.getLiga();
-                    }  
-                    if(anterior != null){
-                    System.out.print(anterior.getDato()+ " - "); }
-                }     
+                sw = true;
+                if(q == p){ 
+                    if(anterior != null){ 
+                        auxiliar = q.getLiga();
+                        while(auxiliar != null){
+                            if(auxiliar.getDato() == null && anterior.getDato() != null){
+                                System.out.println("El padre del Nodo \'"+dato+"\' es " + anterior.getDato());
+                                return true;
+                            }        
+                        auxiliar = auxiliar.getLiga();
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "¡El Nodo \'"+dato+"\' es el Nodo Raíz!");
+                        return true;
+                    }
+                    System.out.println("El padre del Nodo \'"+dato+"\' es " + anterior.getDato());
+                }else{
+                    System.out.println("El padre del Nodo \'"+dato+"\' es " + p.getDato());
+                    return true;
+                }   
             }else{
-                mostrarPadreDatoDado(q.getLigaLista(), dato);
+                mostrarPadreDatoDado(q.getLigaLista(), dato, anterior, false);
             }
-            anterior = q;
+            if( p!= null){
+                anterior = p; 
+            }
             q = q.getLiga();
         } 
+        return sw;
     } 
     
     //Getters and Setters
