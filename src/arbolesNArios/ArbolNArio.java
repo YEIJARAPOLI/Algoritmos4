@@ -112,7 +112,7 @@ public class ArbolNArio {
         NodoArbolNArio q = nodo, p, ant = null, sig;
         
         while (q != null) {
-            if (!q.isSw()/* && (q.getDato().equals(dato))*/) {
+            if (!q.isSw()) {
                 if (q.getDato().equals(dato)) {
                     if (raiz == q) {
                         if (q.getLiga() != null) {
@@ -183,9 +183,34 @@ public class ArbolNArio {
         //return registroEliminado;
         return q;
     }
-//Método Buscar Dato
-    public void buscarDato(int dato){
+    
+    //Método Buscar Dato
+    public void buscarDato(String dato){
+        if (raiz == null) {
+            JOptionPane.showMessageDialog(null, "¡El arbol se encuentra vacío!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
+        buscarDato(raiz, dato);
+    }
+    
+    private boolean buscarDato(NodoArbolNArio p, String dato) {
+        NodoArbolNArio q = p;
+        
+        while (q != null) {
+            if (!q.isSw()) {
+                if (q.getDato().equals(dato)) {
+                    System.out.println("Se encontro el dato '" + dato + "', solicitado por el usuario");
+                    return true;
+                }
+            } else {
+                buscarDato(q.getLigaLista(), dato);
+            }
+            
+            q = q.getLiga();
+        }
+        
+        return false;
     }
 
    /**
@@ -229,7 +254,25 @@ public class ArbolNArio {
     }
     
     public void mostrarGradoArbol(NodoArbolNArio p){
-
+//        int gradoNodo = 0;
+//        NodoArbolNArio q = p, auxiliar;
+//        
+//        while(q != null){ 
+//            if(q.isSw() == false && q.getDato().equals(dato)){
+//                if(q == p){
+//                    auxiliar = q.getLiga();
+//                    while(auxiliar != null){
+//                        gradoNodo++;
+//                    auxiliar = auxiliar.getLiga();
+//                    }         
+//                }     
+//                JOptionPane.showMessageDialog(null, "El grado del Nodo \'"+dato+"\' es "+gradoNodo+".");
+//                return;
+//            }else{
+//                mostrarGradoDatoDado(q.getLigaLista(), dato);
+//            }
+//            q = q.getLiga();
+//        }
     } 
     
    /**
@@ -291,12 +334,60 @@ public class ArbolNArio {
         } 
     } 
     
-    public void mostrarNivel(NodoArbolNArio p){
-
+    public int mostrarNivel(NodoArbolNArio p, String dato, int nivel){
+        int tmp = 0;
+        NodoArbolNArio q = p;
+        
+        if (q == null) {
+            return -1;
+        } else if (q.getDato().equals(dato)) {
+            return nivel;
+        } else {
+            while (q != null) {
+                if (q.isSw()) {
+                    tmp = mostrarNivel(q.getLigaLista(), dato, nivel + 1);
+                    
+                    if (tmp != -1) {
+                        return tmp;
+                    }
+                } else if (q.getDato().equals(dato)) {
+                    return nivel + 1;
+                }
+                
+                q = q.getLiga();
+            }
+            
+            return -1;
+        }
     }
         
-    public void mostrarAltura(NodoArbolNArio p){
-
+    public int mostrarAltura(NodoArbolNArio p){
+        int mayor = 0, tmp;
+        boolean bandera = false;
+        NodoArbolNArio q = p;
+        
+        if (q == null) {
+            return 0;
+        } else {
+            while (q != null) {
+                if (q.isSw()) {
+                    tmp = mostrarAltura(q.getLigaLista());
+                    
+                    if (tmp > mayor) {
+                        mayor = tmp;
+                    }
+                }
+                
+                if (!bandera && q.getLiga() != null) {
+                    mayor++;
+                    bandera = true;
+                }
+                
+                q = q.getLiga();
+            }
+            
+            return mayor + 1;
+        }
     }
  
    /**
@@ -312,12 +403,12 @@ public class ArbolNArio {
         while(q != null){ 
             if(q.isSw() == false && q.getDato().equals(dato)){
                 if(q == p){
-                        auxiliar = q.getLiga();
-                        while(auxiliar != null){   
-                        auxiliar = auxiliar.getLiga();
-                        }  
-                        if(anterior != null){
-                        System.out.print(anterior.getDato()+ " - "); }
+                    auxiliar = q.getLiga();
+                    while(auxiliar != null){   
+                    auxiliar = auxiliar.getLiga();
+                    }  
+                    if(anterior != null){
+                    System.out.print(anterior.getDato()+ " - "); }
                 }     
             }else{
                 mostrarPadreDatoDado(q.getLigaLista(), dato);

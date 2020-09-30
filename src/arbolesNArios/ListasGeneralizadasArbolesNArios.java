@@ -14,63 +14,23 @@ public class ListasGeneralizadasArbolesNArios {
     
     public static void main(String[] args) {
         ArbolNArio arbol = new ArbolNArio();
-        
-//        arbol.setRaiz(new NodoArbolNArio("X"));
-//        
-//        arbol.getRaiz().setLiga(new NodoArbolNArio(null));
-//        arbol.getRaiz().getLiga().setLigaLista(new NodoArbolNArio("C"));
-//        arbol.getRaiz().getLiga().getLigaLista().setLiga(new NodoArbolNArio("D"));
-//        arbol.getRaiz().getLiga().getLigaLista().getLiga().setLiga(new NodoArbolNArio("E"));
-//        
-//        arbol.getRaiz().getLiga().setLiga(new NodoArbolNArio("F"));
-//        
-//        arbol.getRaiz().getLiga().getLiga().setLiga(new NodoArbolNArio(null));
-//        arbol.getRaiz().getLiga().getLiga().getLiga().setLigaLista(new NodoArbolNArio("H"));
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().setLiga(new NodoArbolNArio("W"));
-//        
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().setLiga(new NodoArbolNArio(null));
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().setLigaLista(new NodoArbolNArio("G"));
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().getLigaLista().setLiga(new NodoArbolNArio("Z"));
-//        
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().setLiga(new NodoArbolNArio("K"));
-//        arbol.getRaiz().getLiga().getLiga().getLiga().getLigaLista().getLiga().getLiga().getLiga().setLiga(new NodoArbolNArio("M"));
-//        
-//        arbol.getRaiz().getLiga().getLiga().getLiga().setLiga(new NodoArbolNArio("S"));
-//        
-//        arbol.mostrarArbol(arbol.getRaiz());
-//        
-//        arbol.eliminarNodo("W");
-//        
-//        System.out.println("");
-//        
-//        arbol.mostrarArbol(arbol.getRaiz());
-//
-//        arbol.eliminarNodo("H");
-//        
-//        System.out.println("");
-//        
-//        arbol.mostrarArbol(arbol.getRaiz());
-//        
-//        arbol.eliminarNodo("X");
-//        
-//        System.out.println("");
-//        
-//        arbol.mostrarArbol(arbol.getRaiz());
-//        
-//        arbol.eliminarNodo("X");
-//        
-//        System.out.println("");
-//        
-//        arbol.mostrarArbol(arbol.getRaiz());
-        
-        
         String menu = TITLE_MENU
-                +"\n1. Insertar Árbol - OK \n2. Mostrar Arbol - OK \n3. Eliminar \n4. Buscar Dato \n5. Mostrar Raíces - OK "
-                +"\n6. Mostrar Hojas - OK \n7. Mostrar Grado Arbol \n8. Mostrar Grado Dato Dado - OK "
-                +"\n9. Mostrar Hijos Dato Dado - OK \n10. Mostrar Nivel \n11. Mostrar Altura \n12. Mostrar Padre Dato Dato "
-                +"\n0. SALIR";
+                + "\n1. Insertar Árbol - OK"
+                + "\n2. Mostrar Arbol - OK"
+                + "\n3. Eliminar - OK"
+                + "\n4. Buscar Dato - OK"
+                + "\n5. Mostrar Raíces - OK "
+                + "\n6. Mostrar Hojas - OK"
+                + "\n7. Mostrar Grado Arbol"
+                + "\n8. Mostrar Grado Dato Dado - OK "
+                + "\n9. Mostrar Hijos Dato Dado - OK"
+                + "\n10. Mostrar Nivel - OK"
+                + "\n11. Mostrar Altura - OK"
+                + "\n12. Mostrar Padre Dato Dato - OK"
+                + "\n0. SALIR";
         int opcion;
         String dato;
+        
         do{
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
             switch(opcion){
@@ -102,9 +62,11 @@ public class ListasGeneralizadasArbolesNArios {
                     arbol.eliminarNodo(datoBuscarForDelete);
                     break;
                 //Buscar Dato
-                case 4: 
+                case 4:
+                    dato = JOptionPane.showInputDialog(null, "Ingrese Dato a Buscar", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    arbol.buscarDato(dato);
                     break;
-                    //Mostrar Raices
+                //Mostrar Raices
                 case 5:
                     arbol.mostrarRaices(arbol.getRaiz());
                     break;
@@ -129,9 +91,16 @@ public class ListasGeneralizadasArbolesNArios {
                     break;    
                 //Mostrar Nivel
                 case 10:
+                    Integer nivel = 1;
+                    dato = JOptionPane.showInputDialog(null, "Ingrese el dato a calcularle el nivel", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    nivel = arbol.mostrarNivel(arbol.getRaiz(), dato, 1);
+                    System.out.println("El nivel del dato '" + dato + "' en el arbol es :: " + nivel);
                     break;
                 //Mostrar Altura
                 case 11:
+                    Integer altura = 1;
+                    altura = arbol.mostrarAltura(arbol.getRaiz());
+                    System.out.println("La altura del arbol es :: " + altura);
                     break;
                 //Mostrar Padre Dato Dato
                 case 12:
