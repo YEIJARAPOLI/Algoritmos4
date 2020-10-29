@@ -15,12 +15,12 @@ public class ValidarPatron {
 
     //Válida números célulares con prefijos de Colombia.
     public boolean validarNumeroCelular(String numeroCelular){
-        String claro = "310|311|312|313|314|320|321|322|323|";
-        String tigo = "300|301|302|304|305|";
-        String movistar = "315|316|317|318|";
+        String prefijosClaro = "310|311|312|313|314|320|321|322|323|";
+        String prefijosTigo = "300|301|302|304|305|";
+        String prefijosMovistar = "315|316|317|318|";
         String otrosOperadores = "319|350|351|303|304|305";
         StringBuilder operadores = new StringBuilder("");
-        operadores.append(claro).append(tigo).append(movistar).append(otrosOperadores);
+        operadores.append(prefijosClaro).append(prefijosTigo).append(prefijosMovistar).append(otrosOperadores);
         String patron = "(\\+57|\\+0057|0057|57)?("+operadores.toString()+")+[0-9]{7}";
 
         return validarPatron(patron, numeroCelular);
@@ -33,6 +33,46 @@ public class ValidarPatron {
         return validarPatron(patron, numeroTelefonico);
     }
 
+    //Válida direcciones residenciales en Medellín. (CL, CR, AV, TRAS)
+    public boolean validarDireccionResidencial(String direccion){
+
+        String patron = "";
+        return validarPatron(patron, direccion);
+    }
+         
+    //Válida placas de carro el Colombia.
+    /* @azules amarilla y blanca 3 letras guion y tres numeros(autos clasicos,particular, servcio publico)
+     * @matricula roja T-cuatro numeros (transito libre)
+     * @azul dos letras-4numeros(diplomaticos)
+     * @verde R|S remolque o semiremolque y 5 numeros
+     */
+    public boolean validarPlacasCarro(String placa){
+
+        String patron = "";
+        return validarPatron(patron, placa);
+    }
+    
+    //Válida fecha dd mm aaaa. (1900-2100)
+    public boolean validarFecha(String fecha){
+
+        String patron = "";
+        return validarPatron(patron, fecha);
+    }
+    
+    //Válida cédulas en Colombia.
+    public boolean validarCedula(String cedula){
+
+        String patron = "";
+        return validarPatron(patron, cedula);
+    }
+    
+    //Válida correo electrónico.
+    public boolean validarCorreoElectronico(String correoElectronico){
+
+        String patron = "";
+        return validarPatron(patron, correoElectronico);
+    }
+    
     public boolean validarPatron(String patron, String cadena){
         pattern = Pattern.compile(patron);
         matcher = pattern.matcher(cadena);

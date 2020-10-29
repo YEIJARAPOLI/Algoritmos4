@@ -49,21 +49,57 @@ public class ExpresionesRegulares {
                     break;
                 //Números de teléfonos fijos en Medellín.
                 case 2:
+                    String numeroFijo = JOptionPane.showInputDialog(null, "Ingrese número telefónico a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarNumeroTelefononicoFijo(numeroFijo)){
+                        JOptionPane.showMessageDialog(null, "El número telefónico ingresado, ¡Es Válido!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El número telefónico ingresado, ¡No es Válido!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
-                //Direcciones residenciales en Medellín.
+                //Direcciones residenciales en Medellín. (CL, CR, AV, TRAS)
                 case 3:
+                    String direccion = JOptionPane.showInputDialog(null, "Ingrese dirección residencial a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarDireccionResidencial(direccion)){
+                        JOptionPane.showMessageDialog(null, "La dirección residencial ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La dirección residencial ingresada, ¡No es Válida!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Placas de carro el Colombia.
                 case 4:
+                    String placa = JOptionPane.showInputDialog(null, "Ingrese placa a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarPlacasCarro(placa)){
+                        JOptionPane.showMessageDialog(null, "La placa ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La placa ingresada, ¡No es Válida!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
-                //Fecha en formato dd mm aaaa.
+                //Fecha en formato dd mm aaaa. (1900-2100)
                 case 5:
+                    String fecha = JOptionPane.showInputDialog(null, "Ingrese fecha a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarFecha(fecha)){
+                        JOptionPane.showMessageDialog(null, "La fecha ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La fecha ingresada, ¡No es Válida!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Cédulas en Colombia.
                 case 6:
+                    String cedula = JOptionPane.showInputDialog(null, "Ingrese cédula a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarCedula(cedula)){
+                        JOptionPane.showMessageDialog(null, "La cédula ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La cédula ingresada, ¡No es Válida!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Direcciones de correos electrónicos.
                 case 7:
+                    String correoElectronico = JOptionPane.showInputDialog(null, "Ingrese correo electrónico a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    if(validarPatron.validarCedula(correoElectronico)){
+                        JOptionPane.showMessageDialog(null, "El correo electrónico ingresado, ¡Es Válido!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El correo electrónico ingresado, ¡No es Válido!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Direcciones de sitios web (URL).
                 case 8:
