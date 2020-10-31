@@ -1,7 +1,8 @@
 package expresionesRegulares;
 
 import javax.swing.JOptionPane;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  * Expresiones Regulares
  * @author leonChanci
@@ -15,13 +16,12 @@ public class ExpresionesRegulares {
         /* Expresiones regulares
            Escribir una expresión regular para validar cada una de las siguientes entradas:
         */
-        
         String menu = TITLE_MENU
                 + "\n"
                 + "\n  1. Número celular Colombia - OK"
                 + "\n  2. Número teléfono fijos Medellín - OK"
                 + "\n  3. Direcciones residenciales en Medellín - OK"
-                + "\n  4. Placas carro Colombia"
+                + "\n  4. Placas carro Colombia - OK"
                 + "\n  5. Fecha formato (dd mm aaaa)"
                 + "\n  6. Cédula Colombiana"
                 + "\n  7. Direccion correo electrónico"

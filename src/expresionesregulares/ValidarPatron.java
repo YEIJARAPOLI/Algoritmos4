@@ -45,20 +45,24 @@ public class ValidarPatron {
         String validarNum = "[1-9]{1}[0-9]{1,2}";
         String patron = "^(("+nomenclaturas+")\\s"+validarNum+"([a-zA-Z]{1,2})?)?\\s?"      //Válida la primer parte ejem: "CR 30A" 
                        + "((#|("+nomenclaturas+"))\\s?"+validarNum+"([a-zA-Z]{1,2})?\\s?)?" //Válida la segunda parte ejem: "TV 80"
-                       + "("+validarNum+"|-"+validarNum+"|(\\s(IN)\\s"+validarNum+"))?";    //Válida la tercera parte ejem: "[00]" , "-20" o " IN 321"
+                       + "("+validarNum+"|-"+validarNum+"|(\\s(IN|INT)\\s"+validarNum+"))?";    //Válida la tercera parte ejem: "[00]" , "-20" o " IN 321"
                
         return validarPatron(patron, direccion, true);
     }
          
     //Válida placas de carro el Colombia.
-    /* @azules amarilla y blanca 3 letras guion y tres numeros(autos clasicos,particular, servcio publico)
-     * @matricula roja T-cuatro numeros (transito libre)
-     * @azul dos letras-4numeros(diplomaticos)
-     * @verde R|S remolque o semiremolque y 5 numeros
+    /*
+      Placas Amarillas - Vechículos Particulares - ejem: (AAA 123)
+      Placas Blancas - Vechículos Públicos - ejem: (AAA 123)
+      Placas Azules - Vechículos Especiales - ejem: (AA 1234)
+      Placas Rojas - Vehículos Carga - ejem: (T 1234)
+      Placas Verdes - Vehículos Semiremolques y Remolques - ejem: (R12345), (S12345)
+      Placas Motocicletas - Ejem: AAA 12A
      */
     public boolean validarPlacasCarro(String placa){
-
-        String patron = "";
+        String patron = "(([A-Z]{3}(\\s|-)?[\\d]{3})|([A-Z]{2}(\\s|-)?[\\d]{4})|"
+                      + "((T)(\\s|-)?[\\d]{4})|((R|S)(\\s|-)?[\\d]{5})|"
+                      + "([A-Z]{3}(\\s|-)?[\\d]{2}[A-Z]{1}))?";
         return validarPatron(patron, placa, true);
     }
     
