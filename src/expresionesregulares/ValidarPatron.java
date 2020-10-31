@@ -23,21 +23,31 @@ public class ValidarPatron {
         operadores.append(prefijosClaro).append(prefijosTigo).append(prefijosMovistar).append(otrosOperadores);
         String patron = "(\\+57|\\+0057|0057|57)?("+operadores.toString()+")+[0-9]{7}";
 
-        return validarPatron(patron, numeroCelular);
+        return validarPatron(patron, numeroCelular, false);
     }
 
     //Válida números telefónicos fijos en Medellín.
     public boolean validarNumeroTelefononicoFijo(String numeroTelefonico){
-
-        String patron = "";
-        return validarPatron(patron, numeroTelefonico);
+        //Ejemplos encontrados: 
+        //212, 221, 226, 230, 233, 234, 235, 254, 257, 267, 286, 
+        //353, 373, 384,  
+        //427, 476, 492
+        //511, 514, 538, 576
+        String primerNumeroValido = "2,3,4,5";  
+        String proNombreExtensiones = "EXT|EXTENSION|extensión|EXTENSIÓN";
+        String patron = "(4|94|094)?["+primerNumeroValido+"]{1}[0-9]{6}(\\s?("+proNombreExtensiones+")\\s?[0-9]{2,4})?";
+        return validarPatron(patron, numeroTelefonico, true);
     }
 
     //Válida direcciones residenciales en Medellín. (CL, CR, AV, TRAS)
     public boolean validarDireccionResidencial(String direccion){
-
-        String patron = "";
-        return validarPatron(patron, direccion);
+        String nomenclaturas = "CL|CR|AV|TV|CLL|CALLE|CRR|CARRERA|AVENIDA|TRANSVERSAL";
+        String validarNum = "[1-9]{1}[0-9]{1,2}";
+        String patron = "^(("+nomenclaturas+")\\s"+validarNum+"([a-zA-Z]{1,2})?)?\\s?"      //Válida la primer parte ejem: "CR 30A" 
+                       + "((#|("+nomenclaturas+"))\\s?"+validarNum+"([a-zA-Z]{1,2})?\\s?)?" //Válida la segunda parte ejem: "TV 80"
+                       + "("+validarNum+"|-"+validarNum+"|(\\s(IN)\\s"+validarNum+"))?";    //Válida la tercera parte ejem: "[00]" , "-20" o " IN 321"
+               
+        return validarPatron(patron, direccion, true);
     }
          
     //Válida placas de carro el Colombia.
@@ -49,34 +59,38 @@ public class ValidarPatron {
     public boolean validarPlacasCarro(String placa){
 
         String patron = "";
-        return validarPatron(patron, placa);
+        return validarPatron(patron, placa, true);
     }
     
     //Válida fecha dd mm aaaa. (1900-2100)
     public boolean validarFecha(String fecha){
 
         String patron = "";
-        return validarPatron(patron, fecha);
+        return validarPatron(patron, fecha, false);
     }
     
     //Válida cédulas en Colombia.
     public boolean validarCedula(String cedula){
 
         String patron = "";
-        return validarPatron(patron, cedula);
+        return validarPatron(patron, cedula, false);
     }
     
     //Válida correo electrónico.
     public boolean validarCorreoElectronico(String correoElectronico){
 
         String patron = "";
-        return validarPatron(patron, correoElectronico);
+        return validarPatron(patron, correoElectronico, true);
     }
     
-    public boolean validarPatron(String patron, String cadena){
-        pattern = Pattern.compile(patron);
-        matcher = pattern.matcher(cadena);
-        
+    //Método para compilar el patrón y retornar el resultar
+    public boolean validarPatron(String patron, String cadenaAValidar, boolean caseInsensitive){
+        if(caseInsensitive){
+            pattern = Pattern.compile(patron, Pattern.CASE_INSENSITIVE);
+        }else{
+            pattern = Pattern.compile(patron);
+        }
+        matcher = pattern.matcher(cadenaAValidar);    
         return matcher.matches();
     }
     

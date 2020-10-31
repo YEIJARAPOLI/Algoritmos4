@@ -15,19 +15,21 @@ public class ExpresionesRegulares {
         /* Expresiones regulares
            Escribir una expresión regular para validar cada una de las siguientes entradas:
         */
+        
         String menu = TITLE_MENU
                 + "\n"
-                + "\n  1. Número celular Colombia"
-                + "\n  2. Número teléfono fijos Medellín"
-                + "\n  3. Direcciones residenciales en Medellín"
+                + "\n  1. Número celular Colombia - OK"
+                + "\n  2. Número teléfono fijos Medellín - OK"
+                + "\n  3. Direcciones residenciales en Medellín - OK"
                 + "\n  4. Placas carro Colombia"
                 + "\n  5. Fecha formato (dd mm aaaa)"
                 + "\n  6. Cédula Colombiana"
                 + "\n  7. Direccion correo electrónico"
                 + "\n  8. Direccion sitios web (URL)"
                 + "\n  9. Declaracion variables java"
-                + "\n10. Nombres y apellidos"
-                + "\n11. Contaseña segura"
+                + "\n  10. Nombres y apellidos"
+                + "\n  11. Contaseña segura"
+                + "\n  12. Buscar ..."
                 + "\n"
                 + "\n  0. SALIR";
 
@@ -56,9 +58,9 @@ public class ExpresionesRegulares {
                         JOptionPane.showMessageDialog(null, "El número telefónico ingresado, ¡No es Válido!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
                     }
                     break;
-                //Direcciones residenciales en Medellín. (CL, CR, AV, TRAS)
+                //Direcciones residenciales en Medellín.  (CL, CR, AV, TV).
                 case 3:
-                    String direccion = JOptionPane.showInputDialog(null, "Ingrese dirección residencial a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    String direccion = JOptionPane.showInputDialog(null, "Ingrese dirección residencial a validar. (CL, CR, AV, TV).", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
                     if(validarPatron.validarDireccionResidencial(direccion)){
                         JOptionPane.showMessageDialog(null, "La dirección residencial ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
                     }else{
@@ -132,10 +134,14 @@ public class ExpresionesRegulares {
                                 .append("Al menos un caracter especial\n")
                                 .append("Al menos una minuscula y una mayuscula\n")
                                 .append("No debe contener espacios ni tabulaciones\n");
-                        
+
                         JOptionPane.showMessageDialog(null, sb.toString(), TITLE_MENU, JOptionPane.WARNING_MESSAGE);
                     }
                     break;
+                //Buscar...
+                case 12:
+                    break;
+        
                 case 0:
                     System.exit(0);
                     break;
