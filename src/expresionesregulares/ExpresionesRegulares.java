@@ -22,14 +22,15 @@ public class ExpresionesRegulares {
                 + "\n  2. Número teléfono fijos Medellín - OK"
                 + "\n  3. Direcciones residenciales en Medellín - OK"
                 + "\n  4. Placas carro Colombia - OK"
-                + "\n  5. Fecha formato (dd mm aaaa)"
+                + "\n  5. Fecha formato (dd mm aaaa) - OK"
                 + "\n  6. Cédula Colombiana"
                 + "\n  7. Direccion correo electrónico"
                 + "\n  8. Direccion sitios web (URL)"
                 + "\n  9. Declaracion variables java"
                 + "\n  10. Nombres y apellidos"
                 + "\n  11. Contaseña segura"
-                + "\n  12. Buscar ..."
+                + "\n  12. Buscar celulares validos(Colombia) dentro de un texto - OK"
+                + "\n  13. Buscar correosElectrónicos validos dentro de un texto"
                 + "\n"
                 + "\n  0. SALIR";
 
@@ -138,10 +139,18 @@ public class ExpresionesRegulares {
                         JOptionPane.showMessageDialog(null, sb.toString(), TITLE_MENU, JOptionPane.WARNING_MESSAGE);
                     }
                     break;
-                //Buscar...
+                //Buscar celulares validos(Colombia) dentro de un texto
                 case 12:
+                    String texto = "Texto3098976654 @gmail.comdatos celulares3216750078contactos de telefono *3512291647"
+                            + "correosleon@hotmail.es Electronicos360125887524610321243232291647 numero de vivienda y direcciones"
+                            + "numerode Cudula de ciudadaniasara@gmail.com ";
+                    validarPatron.encontrarNumeroCelular(texto);
                     break;
-        
+                //13. Buscar correosElectrónicos validos dentro de un texto
+                case 13:
+                    String texto2 = "";
+                    validarPatron.encontrarCorreoElectronico(texto2);
+                    break;
                 case 0:
                     System.exit(0);
                     break;

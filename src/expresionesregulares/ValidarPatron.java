@@ -1,7 +1,9 @@
 package expresionesRegulares;
 
+import static expresionesRegulares.ExpresionesRegulares.TITLE_MENU;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  * Validar patrón expresiones regulares
@@ -24,6 +26,19 @@ public class ValidarPatron {
         String patron = "(\\+57|\\+0057|0057|57)?("+operadores.toString()+")+[0-9]{7}";
 
         return validarPatron(patron, numeroCelular, false);
+    }
+    
+    //Encuentra números célulares válidos (prefijos colombia) dentro de un texto.
+    public void encontrarNumeroCelular(String texto){
+        String prefijosClaro = "310|311|312|313|314|320|321|322|323|";
+        String prefijosTigo = "300|301|302|304|305|";
+        String prefijosMovistar = "315|316|317|318|";
+        String otrosOperadores = "319|350|351|303|304|305";
+        StringBuilder operadores = new StringBuilder("");
+        operadores.append(prefijosClaro).append(prefijosTigo).append(prefijosMovistar).append(otrosOperadores);
+        String patron = "(\\+57|\\+0057|0057|57)?("+operadores.toString()+")+[0-9]{7}";
+
+        encontrarPatron(patron, texto, false);
     }
 
     //Válida números telefónicos fijos en Medellín.
@@ -68,8 +83,7 @@ public class ValidarPatron {
     
     //Válida fecha dd mm aaaa. (1900-2100)
     public boolean validarFecha(String fecha){
-
-        String patron = "";
+        String patron = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])(\\/|-)(((19|20)[0-9]{2})|(21)[0]{2})";
         return validarPatron(patron, fecha, false);
     }
     
@@ -87,7 +101,14 @@ public class ValidarPatron {
         return validarPatron(patron, correoElectronico, true);
     }
     
-    //Método para compilar el patrón y retornar el resultar
+    //Encuentra correos electrónicos válidos dentro de un texto
+    public void encontrarCorreoElectronico(String texto){
+    
+        String patron = "";
+        encontrarPatron(patron, texto, false);
+    }
+    
+    //Método para compilar el patrón y retornar el resultado
     public boolean validarPatron(String patron, String cadenaAValidar, boolean caseInsensitive){
         if(caseInsensitive){
             pattern = Pattern.compile(patron, Pattern.CASE_INSENSITIVE);
@@ -96,6 +117,26 @@ public class ValidarPatron {
         }
         matcher = pattern.matcher(cadenaAValidar);    
         return matcher.matches();
+    }
+    
+    //Método para compilar el patrón y mostrar el resultado encontrado
+    public void encontrarPatron(String patron, String texto, boolean caseInsensitive){
+        if(caseInsensitive){
+            pattern = Pattern.compile(patron, Pattern.CASE_INSENSITIVE);
+        }else{
+            pattern = Pattern.compile(patron);
+        }
+        matcher = pattern.matcher(texto);   
+        
+        int contador = 0;
+        while(matcher.find()){
+            int desde = matcher.start();
+            int hasta = matcher.end();
+            contador ++;   
+            JOptionPane.showMessageDialog(null, "Desde: "+desde+"- Hasta: "+hasta+"."
+                + "\nEl texto que cumple es: '"+texto.substring(desde, hasta)+"'"+".", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+            }
+        JOptionPane.showMessageDialog(null, "El patrón se encontró "+contador+" vez(veces) en el texto.", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
     }
     
     public boolean validarPassword(String pass) {
