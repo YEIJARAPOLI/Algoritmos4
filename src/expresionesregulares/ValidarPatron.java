@@ -89,21 +89,39 @@ public class ValidarPatron {
     
     //Válida cédulas en Colombia.
     public boolean validarCedula(String cedula){
-
-        String patron = "";
-        return validarPatron(patron, cedula, false);
+        pattern = Pattern.compile("(^[1][0-9]{7,10})|(^[4][0-9]{6,})");
+        matcher = pattern.matcher(cedula);
+        
+        return matcher.find();
+    }
+    
+    public boolean validarDeclaracionVariable(String declaracion) {
+        String atributo = "public|private|protected";
+        
+        pattern = Pattern.compile("(" + atributo + " + \\s)?([A-Z{1}][[A-Z][a-z])+(\\s[A-Z{1}][A-Z][a-z])+(\\s[={1}]+)?");
+        matcher = pattern.matcher(declaracion);
+        
+        return matcher.find();
     }
     
     //Válida correo electrónico.
     public boolean validarCorreoElectronico(String correoElectronico){
-
-        String patron = "";
-        return validarPatron(patron, correoElectronico, true);
+        pattern = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b", Pattern.CASE_INSENSITIVE);
+        matcher = pattern.matcher(correoElectronico);
+        
+        return matcher.find();
+    }
+    
+    //Válidar nombre y apellidos
+    public boolean validarNombres(String nombre) {
+        pattern = Pattern.compile("[A-Z][a-z]+(\\s[A-Z][a-z]+)?");
+        matcher = pattern.matcher(nombre);
+        
+        return matcher.find();
     }
     
     //Encuentra correos electrónicos válidos dentro de un texto
     public void encontrarCorreoElectronico(String texto){
-    
         String patron = "";
         encontrarPatron(patron, texto, false);
     }

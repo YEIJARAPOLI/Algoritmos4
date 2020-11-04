@@ -23,12 +23,12 @@ public class ExpresionesRegulares {
                 + "\n  3. Direcciones residenciales en Medellín - OK"
                 + "\n  4. Placas carro Colombia - OK"
                 + "\n  5. Fecha formato (dd mm aaaa) - OK"
-                + "\n  6. Cédula Colombiana"
-                + "\n  7. Direccion correo electrónico"
-                + "\n  8. Direccion sitios web (URL)"
+                + "\n  6. Cédula Colombiana - OK"
+                + "\n  7. Direccion correo electrónico - OK"
+                + "\n  8. Direccion sitios web (URL) - OK"
                 + "\n  9. Declaracion variables java"
-                + "\n  10. Nombres y apellidos"
-                + "\n  11. Contaseña segura"
+                + "\n  10. Nombres y apellidos - OK"
+                + "\n  11. Contaseña segura - OK"
                 + "\n  12. Buscar celulares validos(Colombia) dentro de un texto - OK"
                 + "\n  13. Buscar correosElectrónicos validos dentro de un texto"
                 + "\n"
@@ -89,6 +89,7 @@ public class ExpresionesRegulares {
                 //Cédulas en Colombia.
                 case 6:
                     String cedula = JOptionPane.showInputDialog(null, "Ingrese cédula a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    
                     if(validarPatron.validarCedula(cedula)){
                         JOptionPane.showMessageDialog(null, "La cédula ingresada, ¡Es Válida!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
                     }else{
@@ -98,7 +99,8 @@ public class ExpresionesRegulares {
                 //Direcciones de correos electrónicos.
                 case 7:
                     String correoElectronico = JOptionPane.showInputDialog(null, "Ingrese correo electrónico a validar. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
-                    if(validarPatron.validarCedula(correoElectronico)){
+                    
+                    if(validarPatron.validarCorreoElectronico(correoElectronico)){
                         JOptionPane.showMessageDialog(null, "El correo electrónico ingresado, ¡Es Válido!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
                     }else{
                         JOptionPane.showMessageDialog(null, "El correo electrónico ingresado, ¡No es Válido!", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
@@ -116,9 +118,23 @@ public class ExpresionesRegulares {
                     break;
                 //Una declaracion de variables en java.
                 case 9:
+                    String variable = JOptionPane.showInputDialog(null, "Ingrese la variable", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if (validarPatron.validarDeclaracionVariable(variable)) {
+                        JOptionPane.showMessageDialog(null, "¡Variable validada exitosamente!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La variable ingresada no es valida", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Nombres y apellidos.
                 case 10:
+                    String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a validar", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if (validarPatron.validarNombres(nombre)) {
+                        JOptionPane.showMessageDialog(null, "¡Nombre valido exitosamente!", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El nombre ingresado no es valida", TITLE_MENU, JOptionPane.WARNING_MESSAGE);
+                    }
                     break;
                 //Contraseña segura.
                 case 11:
