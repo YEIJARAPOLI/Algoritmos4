@@ -18,18 +18,18 @@ public class ExpresionesRegulares {
         */
         String menu = TITLE_MENU
                 + "\n"
-                + "\n  1. Número celular Colombia - OK"
-                + "\n  2. Número teléfono fijos Medellín - OK"
-                + "\n  3. Direcciones residenciales en Medellín - OK"
-                + "\n  4. Placas carro Colombia - OK"
-                + "\n  5. Fecha formato (dd mm aaaa) - OK"
-                + "\n  6. Cédula Colombiana - OK"
-                + "\n  7. Direccion correo electrónico - OK"
-                + "\n  8. Direccion sitios web (URL) - OK"
+                + "\n  1. Número celular Colombia"
+                + "\n  2. Número teléfono fijos Medellín"
+                + "\n  3. Direcciones residenciales en Medellín"
+                + "\n  4. Placas carro Colombia"
+                + "\n  5. Fecha formato (dd mm aaaa)"
+                + "\n  6. Cédula Colombiana"
+                + "\n  7. Direccion correo electrónico"
+                + "\n  8. Direccion sitios web (URL)"
                 + "\n  9. Declaracion variables java"
-                + "\n  10. Nombres y apellidos - OK"
-                + "\n  11. Contaseña segura - OK"
-                + "\n  12. Buscar celulares validos(Colombia) dentro de un texto - OK"
+                + "\n  10. Nombres y apellidos"
+                + "\n  11. Contaseña segura"
+                + "\n  12. Buscar celulares validos(Colombia) dentro de un texto"
                 + "\n  13. Buscar correosElectrónicos validos dentro de un texto"
                 + "\n"
                 + "\n  0. SALIR";
@@ -164,7 +164,9 @@ public class ExpresionesRegulares {
                     break;
                 //13. Buscar correosElectrónicos validos dentro de un texto
                 case 13:
-                    String texto2 = "";
+                    String texto2 = "Texto3098976654 @gmail.comdatos celulares3216750078contactos de telefono *3512291647"
+                            + " correosleon@hotmail.es Electronicos360125887524610321243232291647 numero de vivienda y direcciones"
+                            + "numerode Cudula de ciudadaniasara@gmail.com prueb@gmail.c";
                     validarPatron.encontrarCorreoElectronico(texto2);
                     break;
                 case 0:

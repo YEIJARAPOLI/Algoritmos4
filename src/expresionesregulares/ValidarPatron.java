@@ -128,8 +128,8 @@ public class ValidarPatron {
     
     //Encuentra correos electrónicos válidos dentro de un texto
     public void encontrarCorreoElectronico(String texto){
-        String patron = "";
-        encontrarPatron(patron, texto, false);
+        String patron = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
+        encontrarPatron(patron, texto, true);
     }
     
     //Método para compilar el patrón y retornar el resultado
