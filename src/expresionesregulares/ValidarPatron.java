@@ -97,8 +97,14 @@ public class ValidarPatron {
     
     public boolean validarDeclaracionVariable(String declaracion) {
         String atributo = "public|private|protected";
+        String varEnteros = "byte|Byte|short|Short|int|Integer|long|Long|";
+        String varDecimales = "float|Float|double|Double|";
+        String varComplementos = "boolean|Boolean|char|Character|String";
         
-        pattern = Pattern.compile("(" + atributo + " + \\s)?([A-Z{1}][[A-Z][a-z])+(\\s[A-Z{1}][A-Z][a-z])+(\\s[={1}]+)?");
+        StringBuilder tiposVariables = new StringBuilder("");
+        tiposVariables.append(varEnteros).append(varDecimales).append(varComplementos);
+        
+        pattern = Pattern.compile("((" + atributo + ")\\s)?(" + tiposVariables + ")\\s(\\w+)(\\s?(=\\s?)(\"+\\w+\"|\"\"|\\d+);|;$)");
         matcher = pattern.matcher(declaracion);
         
         return matcher.find();

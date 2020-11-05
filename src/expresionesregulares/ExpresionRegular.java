@@ -10,12 +10,34 @@ import java.lang.*;
 public class ExpresionRegular {
     
     public static void main(String[] args) {
-        int contador = 0;
+        
+        String atributo = "public|private|protected";
+        String varEnteros = "byte|Byte|short|Short|int|Integer|long|Long|";
+        String varDecimales = "float|Float|double|Double|";
+        String varComplementos = "boolean|Boolean|char|Character|String";
+        
+        StringBuilder tiposVariables = new StringBuilder("");
+        tiposVariables.append(varEnteros).append(varDecimales).append(varComplementos);
+        
+        String cadena = "private String leon = \"uyueyww2323e\";";
+        
+        Pattern pattern = Pattern.compile("((" + atributo + ")\\s)?(" + tiposVariables + ")\\s(\\w+)(\\s?(=\\s?)(\"+\\w+\"|\"\"|\\d+);|;$)");
+        Matcher matcher = pattern.matcher(cadena);
+        
+        System.out.println(cadena);
+        System.out.println(matcher.find());
+        
+        //matcher.find();
+        
+        
+        
+        
+        /*int contador = 0;
         Pattern patron = Pattern.compile("[\\d]" ,Pattern.CASE_INSENSITIVE);
         String cadena = "www.yeijara.com", cadenaNueva, palabras[] = patron.split(cadena);
         Matcher m = patron.matcher(cadena);
         
-        ExpresionRegular er = new ExpresionRegular();
+        ExpresionRegular er = new ExpresionRegular();*/
         
         //er.validarNumerosBinarios(cadena);
         //er.validarNumeroEntero(cadena);
@@ -25,7 +47,7 @@ public class ExpresionRegular {
         //er.validarNumerosCelular(cadena);
         //er.validarNumerosCelulares(cadena);
         //er.validarPassword(cadena);
-        er.validarURL(cadena);
+        //er.validarURL(cadena);
         
 //        if (m.matches()) { // Busca que coincida
 //            //JOptionPane.showMessageDialog(null, "Cumple");
