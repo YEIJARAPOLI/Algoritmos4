@@ -12,6 +12,8 @@ public class Conjuntos {
 
     private int opcion;
     final static String TITLE_MENU = "*** CONJUNTOS ***";
+    final static String TITLE_MENU_VECTORES = "*** CONJUNTOS VECTORES ***";
+    final static String TITLE_MENU_LISTAS = "*** CONJUNTOS LISTAS ***";
 
     public static void main(String[] args) {
         String menu = TITLE_MENU
@@ -50,7 +52,7 @@ public class Conjuntos {
     }
 
     private void menuConjuntoVector() {
-        String menu = "CONJUNTOS EN VECTORES"
+        String menu = TITLE_MENU_VECTORES
                 + "\n" +
                 "\n 1. Agregar" +
                 "\n 2. Mostrar" +
@@ -113,77 +115,88 @@ public class Conjuntos {
                     System.exit(0);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
                     break;
             }
         } while (opcion != 0);
     }
 
     private void menuConjuntoLista() {
-        String menu = "CONJUNTOS EN LISTA"
+        ConjuntoLista conjuntoListaA = new ConjuntoLista();
+        ConjuntoLista conjuntoListaB = new ConjuntoLista();
+        String menu = TITLE_MENU_LISTAS
                 + "\n" +
-                "\n 1. Agregar" +
-                "\n 2. Mostrar" +
-                "\n 3. Borrar" +
-                "\n 4. Vaciar" +
-                "\n 5. Cantidad Elementos" +
-                "\n 6. Unión" +
-                "\n 7. Intersección" +
-                "\n 8. Igualdad" +
-                "\n 9. Complemento" +
-                "\n 10. Posición" +
-                "\n 11. Diferencia" +
-                "\n 12. Diferencia Simetrica" +
+                "\n 1. Agregar conjunto A" +
+                "\n 2. Agregar conjunto B" +
+                "\n 3. Mostrar" +
+                "\n 4. Borrar" +
+                "\n 5. Vaciar" +
+                "\n 6. Cantidad Elementos" +
+                "\n 7. Unión" +
+                "\n 8. Intersección" +
+                "\n 9. Igualdad" +
+                "\n 10. Complemento" +
+                "\n 11. Posición" +
+                "\n 12. Diferencia" +
+                "\n 13. Diferencia Simétrica" +
                 "\n" +
                 "\n 0. SALIR";
 
-        ConjuntoLista conjuntos = new ConjuntoLista();
-
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-
             switch (opcion) {
+                
                 case 1:
                     // Agregar
+                    conjuntoListaA.agregar();
+                    conjuntoListaA.mostrar();
                     break;
                 case 2:
-                    // Mostrar
+                    // Agregar
+
+                    conjuntoListaB.agregar();
+                    conjuntoListaB.mostrar();
                     break;
                 case 3:
-                    // Borrar
+                    // Mostrar
+                    conjuntoListaA.mostrar();
+                    conjuntoListaB.mostrar();
                     break;
                 case 4:
-                    // Vaciar
+                    // Borrar
                     break;
                 case 5:
-                    // Cantidad Elementos
+                    // Vaciar
                     break;
                 case 6:
-                    // Union
+                    // Cantidad Elementos
                     break;
                 case 7:
-                    // Intersección
+                    // Union
                     break;
                 case 8:
-                    // Igualdad
+                    // Intersección
                     break;
                 case 9:
-                    // Complemento
+                    // Igualdad
                     break;
                 case 10:
-                    // Posiciòn
+                    // Complemento
                     break;
                 case 11:
-                    // Diferencia
+                    // Posiciòn
                     break;
                 case 12:
-                    // Diferencia Simetrica
+                    // Diferencia
+                    break;
+                case 13:
+                    // Diferencia Simétrica
                     break;
                 case 0:
                     System.exit(0);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU, JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_LISTAS, JOptionPane.ERROR_MESSAGE);
                     break;
             }
         } while (opcion != 0);
