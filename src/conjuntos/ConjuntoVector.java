@@ -1,6 +1,7 @@
 package conjuntos;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,33 +14,25 @@ import java.util.Map;
 
 public class ConjuntoVector {
 
-    private int n;
-    String[] conjunto;
-    String[] conjuntoUniversal;
-
-    //List<String[]> conjuntos;
     Map<String, Integer[]> conjuntos;
 
-    public int getN() {
-        return n;
+    public ConjuntoVector() {
+        conjuntos = new HashMap<>();
+        asignarConjuntoUniversal();
     }
 
-    public void setN(int n) {
-        this.n = n;
+    private void asignarConjuntoUniversal() {
+        conjuntos.put("Universal", new Integer[]{ 30, 5, 3, 7, 45, 0, 6 });
     }
 
     public String[] agregar(String nombreConjunto) {
-        if (conjuntoUniversal == null) {
-            // Llenar el conjunto universal
-        }
-
         String respuesta = "S";
 
         while (respuesta.equalsIgnoreCase("S")) {
             Integer dato = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese elemento al conjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE));
 
             if (this.almacenarDato(dato, nombreConjunto)) {
-                JOptionPane.showMessageDialog(null, "¡El elemento '" + dato + "' ya esta asignado al conjunto '" + nombreConjunto + "'!", "*** CONJUNTOS VECTORES ***", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "¡El elemento '" + dato + "' ya esta asignado al conjunto '" + nombreConjunto + "' o al Universal!", "*** CONJUNTOS VECTORES ***", JOptionPane.ERROR_MESSAGE);
             }
 
             respuesta = JOptionPane.showInputDialog(null, "Desea ingresar otro elemento al conjunto: '"+nombreConjunto+"' ? (S/N)", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
@@ -49,6 +42,12 @@ public class ConjuntoVector {
     }
 
     private boolean almacenarDato(Integer dato, String nombreConjunto) {
+        /*for (int i = 0; i < conjuntos.get("Universal").length; i++) {
+            if (conjuntos.get("Universal")[i] == dato) {
+                return true;
+            }
+        }*/
+
         if (conjuntos != null && conjuntos.containsKey(nombreConjunto)) {
             boolean existe = false;
             Integer[] tmp = conjuntos.get(nombreConjunto);
@@ -89,9 +88,21 @@ public class ConjuntoVector {
         }
     }
 
-    public void mostrar(String nombreConjunto) {
-        if (conjuntos != null) {
-            String salida = "<html>" + nombreConjunto + " = { ";
+    public void mostrar(String nombreConjunto, String c1, String c2) {
+        if (conjuntos != null && nombreConjunto != null && conjuntos.containsKey(nombreConjunto)) {
+            String salida = "";
+
+            if (c1 == null || c1.isEmpty() || c2 == null || c2.isEmpty()) {
+                salida = "<html>" + nombreConjunto + " = { ";
+            } else {
+                if (nombreConjunto.equals("Union")) {
+                    salida = "<html>" + c1 + " ∪ " + c2 + " = { ";
+                } else if (nombreConjunto.equals("Interseccion")) {
+                    salida = "<html>" + c1 + " ∩ " + c2 + " = { ";
+                } else if (nombreConjunto.equals("Complemento")) {
+                    salida = "<html>" + c1 + "<sup>C</sup> = { ";
+                }
+            }
 
             for (int i = 0; i < conjuntos.get(nombreConjunto).length; i++) {
                 if (i == ((conjuntos.get(nombreConjunto).length) - 1)) {
@@ -103,7 +114,9 @@ public class ConjuntoVector {
 
             salida += " }</html>";
 
-            JOptionPane.showMessageDialog(null, "\n"+salida, "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, salida, "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "¡El conjunto '" + nombreConjunto + "' no esta asignado!", "*** CONJUNTOS VECTORES ***", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -152,6 +165,170 @@ public class ConjuntoVector {
             return conjuntos.get(nombreConjunto).length;
         } else {
             return 0;
+        }
+    }
+
+    public void union(String conjunto1, String conjunto2) {
+        Integer[] conjuntoUnion = null;
+        List<Integer> tmp = new ArrayList<>();
+
+        this.conjuntos.remove("Union");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
+            conjuntoUnion = conjuntos.get(conjunto1);
+            conjuntoUnion = evaluarUnion(conjuntos.get(conjunto2), conjuntoUnion);
+
+            /*for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
+                for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
+                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                        break;
+                    }
+                }
+
+                tmp.add(conjuntos.get(conjunto1)[i]);
+            }
+
+            for (int i = 0; i < conjuntos.get(conjunto2).length; i++) {
+                for (int j = 0; j < tmp.size(); j++) {
+                    if (tmp.get(j) == conjuntos.get(conjunto2)[i]) {
+                        break;
+                    }
+                }
+
+                tmp.add(conjuntos.get(conjunto2)[i]);
+            }
+
+            if (tmp.size() > 0) {
+                conjuntoUnion = new Integer[tmp.size()];
+
+                for (int i = 0; i < tmp.size(); i++) {
+                    conjuntoUnion[i] = tmp.get(i);
+                }*/
+
+                this.conjuntos.put("Union", conjuntoUnion);
+            /*}*/
+        }
+    }
+
+    private Integer[] evaluarUnion(Integer[] c1, Integer[] c2) {
+        Integer[] union = c2;
+
+        for (int i = 0; i < c1.length; i++) {
+            boolean existe = false;
+
+            for (int j = 0; j < c2.length; j++) {
+                if (c1[i] == c2[j]) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                Integer[] tmp = union;
+                union = new Integer[union.length + 1];
+
+                for (int k = 0; k < tmp.length; k++) {
+                    union[k] = tmp[k];
+                }
+
+                union[tmp.length] = c1[i];
+            }
+        }
+
+        return union;
+    }
+
+    public void interseccion(String conjunto1, String conjunto2) {
+        Integer[] conjuntoInterseccion = null;
+        List<Integer> tmp = new ArrayList<>();
+
+        this.conjuntos.remove("Interseccion");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
+            for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
+                for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
+                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                        tmp.add(conjuntos.get(conjunto1)[i]);
+                        break;
+                    }
+                }
+            }
+
+            if (tmp.size() > 0) {
+                conjuntoInterseccion = new Integer[tmp.size()];
+
+                for (int i = 0; i < tmp.size(); i++) {
+                    conjuntoInterseccion[i] = tmp.get(i);
+                }
+
+                this.conjuntos.put("Interseccion", conjuntoInterseccion);
+            }
+        }
+    }
+
+    public void igualarConjuntos(String conjunto1, String conjunto2) {
+        this.conjuntos.remove("Igualdad");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
+            if (cantidadElementos(conjunto1) == cantidadElementos(conjunto2)) {
+                boolean esIgual = false;
+
+                for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
+                    for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
+                        if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                            esIgual = true;
+                            break;
+                        } else {
+                            esIgual = false;
+                        }
+                    }
+                }
+
+                if (esIgual) {
+                    JOptionPane.showMessageDialog(null, "El conjunto " + conjunto1 + " es igual al conjunto " + conjunto2, "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El conjunto " + conjunto1 + " NO es igual al conjunto " + conjunto2, "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El conjunto " + conjunto1 + " NO es igual al conjunto " + conjunto2, "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    public void obtenerComplemento(String conjunto) {
+        Integer[] complemento = new Integer[0];
+        this.conjuntos.remove("Complemento");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto)) {
+            if (!conjuntos.containsKey("Universal")) {
+                asignarConjuntoUniversal();
+            }
+
+            for (int i = 0; i < conjuntos.get("Universal").length; i++) {
+                boolean existe = false;
+
+                for (int j = 0; j < conjuntos.get(conjunto).length; j++) {
+                    if (conjuntos.get("Universal")[i] == conjuntos.get(conjunto)[j]) {
+                        existe = true;
+                        break;
+                    } else {
+                        existe = false;
+                    }
+                }
+
+                if (!existe) {
+                    Integer[] tmp = complemento;
+                    complemento = new Integer[complemento.length + 1];
+
+                    for (int k = 0; k < tmp.length; k++) {
+                        complemento[k] = tmp[k];
+                    }
+
+                    complemento[tmp.length] = conjuntos.get("Universal")[i];
+                }
+            }
+
+            this.conjuntos.put("Complemento", complemento);
         }
     }
 }

@@ -75,6 +75,8 @@ public class Conjuntos {
 
         do {
             String nombreConjunto;
+            String conjunto1;
+            String conjunto2;
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
             switch (opcion) {
@@ -93,7 +95,7 @@ public class Conjuntos {
                     nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto a mostrar", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
 
                     if (!nombreConjunto.isEmpty()) {
-                        conjuntos.mostrar(nombreConjunto);
+                        conjuntos.mostrar(nombreConjunto, null, null);
                     } else {
                         JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
                     }
@@ -131,15 +133,49 @@ public class Conjuntos {
                     break;
                 case 6:
                     // Union
+                    conjunto1 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 1", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    conjunto2 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 2", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!conjunto1.isEmpty() && !conjunto2.isEmpty()) {
+                        conjuntos.union(conjunto1, conjunto2);
+                        conjuntos.mostrar("Union", conjunto1, conjunto2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 7:
                     // Intersección
+                    conjunto1 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 1", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    conjunto2 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 2", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!conjunto1.isEmpty() && !conjunto2.isEmpty()) {
+                        conjuntos.interseccion(conjunto1, conjunto2);
+                        conjuntos.mostrar("Interseccion", conjunto1, conjunto2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 8:
                     // Igualdad
+                    conjunto1 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 1", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    conjunto2 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 2", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!conjunto1.isEmpty() && !conjunto2.isEmpty()) {
+                        conjuntos.igualarConjuntos(conjunto1, conjunto2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 9:
                     // Complemento
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto a evaluar", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        conjuntos.obtenerComplemento(nombreConjunto);
+                        conjuntos.mostrar("Complemento", nombreConjunto, null);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 10:
                     // Posiciòn
