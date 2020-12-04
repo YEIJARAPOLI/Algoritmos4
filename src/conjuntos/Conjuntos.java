@@ -1,6 +1,5 @@
 package conjuntos;
 
-import static conjuntos.ConjuntoLista.TITLE_MENU_LISTAS;
 import javax.swing.*;
 
 /**
@@ -75,23 +74,60 @@ public class Conjuntos {
         ConjuntoVector conjuntos = new ConjuntoVector();
 
         do {
+            String nombreConjunto;
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
             switch (opcion) {
                 case 1:
                     // Agregar
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto a agregar", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        conjuntos.agregar(nombreConjunto);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 2:
                     // Mostrar
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto a mostrar", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        conjuntos.mostrar(nombreConjunto);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 3:
                     // Borrar
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        conjuntos.borrarElemento(nombreConjunto);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 4:
                     // Vaciar
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        conjuntos.vaciarElementos(nombreConjunto);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 5:
                     // Cantidad Elementos
+                    nombreConjunto = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!nombreConjunto.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto '"
+                                + nombreConjunto + "' son: " + conjuntos.cantidadElementos(nombreConjunto), TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡No ha ingresado un nombre de conjunto!", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 6:
                     // Union
