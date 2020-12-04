@@ -178,13 +178,31 @@ public class Conjuntos {
                     }
                     break;
                 case 10:
-                    // Posiciòn
+                    // Posición
                     break;
                 case 11:
                     // Diferencia
+                    conjunto1 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 1", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    conjunto2 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 2", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!conjunto1.isEmpty() && !conjunto2.isEmpty()) {
+                        conjuntos.obtenerDiferencia(conjunto1, conjunto2);
+                        conjuntos.mostrar("Diferencia", conjunto1, conjunto2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 12:
                     // Diferencia Simetrica
+                    conjunto1 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 1", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+                    conjunto2 = JOptionPane.showInputDialog(null, "Ingrese el nombre del conjunto 2", TITLE_MENU_VECTORES, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (!conjunto1.isEmpty() && !conjunto2.isEmpty()) {
+                        conjuntos.obtenerDiferenciaSimetrica(conjunto1, conjunto2);
+                        conjuntos.mostrar("Diferencia-Simetrica", conjunto1, conjunto2);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_VECTORES, JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case 0:
                     System.exit(0);
@@ -358,7 +376,7 @@ public class Conjuntos {
                     }else if(respuestaComplemento.equals("B") || respuestaComplemento.equals("b")){
                         if(!conjuntoListaB.isVacio(conjuntoListaB)){
                             conjuntoListaComplementoB.setCabecera(conjuntoListaComplementoB.complemento(conjuntoListaB, "A"));
-                            conjuntoListaComplementoB.mostrar(conjuntoListaComplementoB, "B<sup>C</sup>");  
+                            conjuntoListaComplementoB.mostrar(conjuntoListaComplementoB, "B<sup>C</sup>");
                         }else{
                             JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_LISTAS, JOptionPane.ERROR_MESSAGE);                          
                         }

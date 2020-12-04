@@ -101,6 +101,10 @@ public class ConjuntoVector {
                     salida = "<html>" + c1 + " ∩ " + c2 + " = { ";
                 } else if (nombreConjunto.equals("Complemento")) {
                     salida = "<html>" + c1 + "<sup>C</sup> = { ";
+                } else if (nombreConjunto.equals("Diferencia")) {
+                    salida = "<html>" + c1 + " - " + c2 + " = { ";
+                } else if (nombreConjunto.equals("Diferencia-Simetrica")) {
+                    salida = "<html>" + c1 + " ∆ " + c2 + " = { ";
                 }
             }
 
@@ -329,6 +333,87 @@ public class ConjuntoVector {
             }
 
             this.conjuntos.put("Complemento", complemento);
+        }
+    }
+
+    public void obtenerDiferencia(String conjunto1, String conjunto2) {
+        Integer[] conjuntoDiferencia = new Integer[0];
+        this.conjuntos.remove("Diferencia");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
+            for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
+                boolean existe = false;
+
+                for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
+                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (!existe) {
+                    Integer[] tmp = conjuntoDiferencia;
+                    conjuntoDiferencia = new Integer[conjuntoDiferencia.length + 1];
+
+                    for (int k = 0; k < tmp.length; k++) {
+                        conjuntoDiferencia[k] = tmp[k];
+                    }
+
+                    conjuntoDiferencia[tmp.length] = conjuntos.get(conjunto1)[i];
+                }
+            }
+
+            this.conjuntos.put("Diferencia", conjuntoDiferencia);
+        }
+    }
+
+    public void obtenerDiferenciaSimetrica(String conjunto1, String conjunto2) {
+        Integer[] conjuntoDiferenciaSimetrica = new Integer[0];
+        Integer[] tmpConjunto2;
+        this.conjuntos.remove("Diferencia-Simetrica");
+
+        if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
+            tmpConjunto2 = conjuntos.get(conjunto2);
+
+            for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
+                boolean existe = false;
+
+                for (int j = 0; j < tmpConjunto2.length; j++) {
+                    if (tmpConjunto2[j] != null && conjuntos.get(conjunto1)[i] == tmpConjunto2[j]) {
+                        existe = true;
+                        tmpConjunto2[j] = null;
+                        break;
+                    }
+                }
+
+                if (!existe) {
+                    Integer[] tmp = conjuntoDiferenciaSimetrica;
+                    conjuntoDiferenciaSimetrica = new Integer[conjuntoDiferenciaSimetrica.length + 1];
+
+                    for (int k = 0; k < tmp.length; k++) {
+                        conjuntoDiferenciaSimetrica[k] = tmp[k];
+                    }
+
+                    conjuntoDiferenciaSimetrica[tmp.length] = conjuntos.get(conjunto1)[i];
+                }
+            }
+
+            if (tmpConjunto2.length > 0) {
+                for (int j = 0; j < tmpConjunto2.length; j++) {
+                    if (tmpConjunto2[j] != null) {
+                        Integer[] tmp = conjuntoDiferenciaSimetrica;
+                        conjuntoDiferenciaSimetrica = new Integer[conjuntoDiferenciaSimetrica.length + 1];
+
+                        for (int k = 0; k < tmp.length; k++) {
+                            conjuntoDiferenciaSimetrica[k] = tmp[k];
+                        }
+
+                        conjuntoDiferenciaSimetrica[tmp.length] = tmpConjunto2[j];
+                    }
+                }
+            }
+
+            this.conjuntos.put("Diferencia-Simetrica", conjuntoDiferenciaSimetrica);
         }
     }
 }
