@@ -22,7 +22,7 @@ public class ConjuntoVector {
     }
 
     private void asignarConjuntoUniversal() {
-        conjuntos.put("Universal", new String[]{ "Colombia", "Londres", "Estados Unidos de America", "Perú", "Brasil" });
+        conjuntos.put("Universal", new String[]{ "Rojo", "Verde", "Amarillo", "Azul", "Morado", "Naranja", "Blanco", "Negro" });
     }
 
     public String[] agregar(String nombreConjunto) {
@@ -381,5 +381,13 @@ public class ConjuntoVector {
 
             this.conjuntos.put("Diferencia-Simetrica", conjuntoDiferenciaSimetrica);
         }
+    }
+    public boolean buscarDatoEnConjunto(String dato, ConjuntoVector conjuntoVec) {
+        for (int i = 0; i < conjuntoVec.conjuntos.get("B").length; i++) {
+            if(conjuntoVec.conjuntos.get("B")[i].equals(dato)){
+                return true;
+            }
+        }
+        return false;
     }
 }

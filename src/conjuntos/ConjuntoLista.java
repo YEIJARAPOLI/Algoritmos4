@@ -100,7 +100,7 @@ public class ConjuntoLista {
                 }              
                 nodo = nodo.getLiga();
             }
-            JOptionPane.showMessageDialog(null, "\n"+salida+"</html>", TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, salida+"</html>", TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);
         } 
     }
 
@@ -233,7 +233,7 @@ public class ConjuntoLista {
                 encontrado = false;
             }
             if(!encontrado){
-                conjuntoDiferencia.almacenarDato(conjunto1.getDato(), "A - B | B -A");
+                conjuntoDiferencia.almacenarDato(conjunto1.getDato(), "A - B | B - A");
                 encontrado = true;
             }
             conjunto1 = conjunto1.getLiga();
