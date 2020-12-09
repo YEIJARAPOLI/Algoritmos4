@@ -21,6 +21,14 @@ public class ConjuntoVector {
         asignarConjuntoUniversal();
     }
 
+    public Map<String, String[]> getConjuntos() {
+        return conjuntos;
+    }
+
+    public void setConjuntos(Map<String, String[]> conjuntos) {
+        this.conjuntos = conjuntos;
+    }
+
     private void asignarConjuntoUniversal() {
         conjuntos.put("Universal", new String[]{ "Rojo", "Verde", "Amarillo", "Azul", "Morado", "Naranja", "Blanco", "Negro" });
     }

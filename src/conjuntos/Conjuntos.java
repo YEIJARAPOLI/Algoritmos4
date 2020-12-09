@@ -227,19 +227,19 @@ public class Conjuntos {
         ConjuntoLista conjuntoListaDiferenciaSimetrica = new ConjuntoLista();
         String menu = TITLE_MENU_LISTAS
                 + "\n" +
-                "\n 1. Agregar conjunto A" +
-                "\n 2. Agregar conjunto B" +
-                "\n 3. Mostrar" +
-                "\n 4. Borrar" +
-                "\n 5. Vaciar" +
-                "\n 6. Cantidad Elementos" +
-                "\n 7. Unión" +
-                "\n 8. Intersección" +
-                "\n 9. Igualdad" +
-                "\n 10. Complemento" +
+                "\n 1. Agregar conjunto A - OK" +
+                "\n 2. Agregar conjunto B - OK" +
+                "\n 3. Mostrar - OK" +
+                "\n 4. Borrar - OK" +
+                "\n 5. Vaciar - OK" +
+                "\n 6. Cantidad Elementos - OK" +
+                "\n 7. Unión - OK" +
+                "\n 8. Intersección - OK" +
+                "\n 9. Igualdad - OK" +
+                "\n 10. Complemento - OK" +
                 "\n 11. Posición" +
-                "\n 12. Diferencia" +
-                "\n 13. Diferencia Simétrica" +
+                "\n 12. Diferencia - OK" +
+                "\n 13. Diferencia Simétrica - OK" +
                 "\n" +
                 "\n 0. SALIR";
         do {
@@ -247,12 +247,12 @@ public class Conjuntos {
             switch (opcion) {
                 
                 case 1:
-                    // Agregar A
+                    // Agregar
                     conjuntoListaA.agregar("A");
                     conjuntoListaA.mostrar(conjuntoListaA, "A");
                     break;
                 case 2:
-                    // Agregar B
+                    // Agregar
                     conjuntoListaB.agregar("B");
                     conjuntoListaB.mostrar(conjuntoListaB, "B");
                     break;
@@ -322,13 +322,14 @@ public class Conjuntos {
                     }else if(respuestaCantidad.equals("B") || respuestaCantidad.equals("b")){
                         if(!conjuntoListaB.isVacio(conjuntoListaB)){
                             int contador = conjuntoListaB.cantidadElementos(conjuntoListaB);  
-                                JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'B' son: "+contador, TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);                           
+                                JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'A' son: "+contador, TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);                           
                         }else{
                             JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_LISTAS, JOptionPane.ERROR_MESSAGE);                          
                         }
                     }else{
                         JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaCantidad+"' no existe!", TITLE_MENU_LISTAS, JOptionPane.ERROR_MESSAGE); 
                     } 
+                    
                     break;
                 case 7:
                     // Union
@@ -429,12 +430,6 @@ public class Conjuntos {
      private void menuCombinado() {
         ConjuntoLista conjuntoA = new ConjuntoLista();
         ConjuntoVector conjuntoB = new ConjuntoVector();
-        ConjuntoLista conjuntoListaUnion = new ConjuntoLista();
-        ConjuntoLista conjuntoListaInterseccion = new ConjuntoLista();
-        ConjuntoLista conjuntoListaComplementoA = new ConjuntoLista();
-        ConjuntoLista conjuntoListaDiferenciaA = new ConjuntoLista();
-        ConjuntoLista conjuntoListaDiferenciaB = new ConjuntoLista();
-        ConjuntoLista conjuntoListaDiferenciaSimetrica = new ConjuntoLista();
         ConjuntosCombinados conjuntosCombinados = new ConjuntosCombinados();
 
         String menu = TITLE_MENU_COMBINADO
@@ -453,6 +448,16 @@ public class Conjuntos {
                 "\n 12. Diferencia Simétrica" +
                 "\n" +
                 "\n 0. SALIR";
+
+        String menuConjuntos = TITLE_MENU_COMBINADO
+                + "\n" +
+                "\n 1. Conjunto A" +
+                "\n 2. Conjunto B" +
+                "\n" +
+                "\n 0. SALIR";
+
+        Integer opcionConjunto;
+
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
@@ -469,77 +474,69 @@ public class Conjuntos {
                     break;
                 case 2:
                     // Mostrar
-                    if(!conjuntoA.isVacio(conjuntoA)){
-                        conjuntoA.mostrar(conjuntoA, "A");
-                    }
-                    if(conjuntoB.conjuntos.get("B") != null){
-                        conjuntoB.mostrar("B", null, null);
-                    }
-                    if(conjuntoA.isVacio(conjuntoA) && conjuntoB.conjuntos.get("B") == null){
-                        JOptionPane.showMessageDialog(null, "¡No existen conjuntos!\n"
-                                + "A = ∅\n"
-                                + "B = ∅\n"
-                                + "Agrege alguno...", TITLE_MENU_LISTAS, JOptionPane.ERROR_MESSAGE);
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.mostrar(conjuntoA, "A");
+                        case 2:
+                            conjuntoB.mostrar("B", null, null);
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
                     }
                     break;
                 case 3:
                     // Borrar
-                    String respuestaBorrar = JOptionPane.showInputDialog(null, "Ingrese el conjunto en el cual borrará un elemento(A/B)", TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);
-                    if(respuestaBorrar.equals("A") || respuestaBorrar.equals("a")){
-                        if(!conjuntoA.isVacio(conjuntoA)){
-                            conjuntoA.borrarElemento(conjuntoA, "A");    
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'A' !\nA = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                        
-                        }
-                    }else if(respuestaBorrar.equals("B") || respuestaBorrar.equals("b")){
-                        if(conjuntoB.conjuntos.get("B") != null){ 
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.borrarElemento(conjuntoA, "A");
+                        case 2:
                             conjuntoB.borrarElemento("B");
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                         
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaBorrar+"' no existe!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE); 
-                    } 
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 4:
                     // Vaciar
-                    String respuestaVaciar = JOptionPane.showInputDialog(null, "Ingrese el conjunto el cual se vaciará(A/B)", TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
-                    if(respuestaVaciar.equals("A") || respuestaVaciar.equals("a")){
-                        if(!conjuntoA.isVacio(conjuntoA)){
-                            conjuntoA.vaciarElementos(conjuntoA, "A");   
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'A' !\nA = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else if(respuestaVaciar.equals("B") || respuestaVaciar.equals("b")){
-                        if(conjuntoB.conjuntos.get("B") != null){   
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.vaciarElementos(conjuntoA, "A");
+                        case 2:
                             conjuntoB.vaciarElementos("B");
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaVaciar+"' no existe!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
                     }
                     break;
                 case 5:
                     // Cantidad Elementos
-                    String respuestaCantidad = JOptionPane.showInputDialog(null, "Ingrese el conjunto en el cual se mostrará la cantidad de elementos(A/B)", TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);
-                    if(respuestaCantidad.equals("A") || respuestaCantidad.equals("a")){
-                        if(!conjuntoA.isVacio(conjuntoA)){
-                            int contador = conjuntoA.cantidadElementos(conjuntoA);    
-                                JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'A' son: "+contador, TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'A' !\nA = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else if(respuestaCantidad.equals("B") || respuestaCantidad.equals("b")){
-                        if(conjuntoB.conjuntos.get("B") != null){                      
-                            int contador = conjuntoB.cantidadElementos("B");
-                                JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'B' son: "+contador, TITLE_MENU_LISTAS, JOptionPane.INFORMATION_MESSAGE);                           
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaCantidad+"' no existe!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE); 
-                    } 
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'A' son: "
+                                    + conjuntoA.cantidadElementos(conjuntoA), TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'B' son: "
+                                    + conjuntoB.cantidadElementos("B"), TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 6:
                     // Union
@@ -550,44 +547,34 @@ public class Conjuntos {
                     break;
                 case 7:
                     // Intersección
-                    if(!conjuntoA.isVacio(conjuntoA)){
-                        conjuntoListaInterseccion.setCabecera(conjuntosCombinados.interseccion(conjuntoA, conjuntoB));
-                        conjuntoListaInterseccion.mostrar(conjuntoListaInterseccion, "A ∩ B = C");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos tengan elementos", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
-                        conjuntoA.mostrar(conjuntoA, "A");
-                        conjuntoB.mostrar("B", null, null);
-                    }
+                    ConjuntoLista interseccion = new ConjuntoLista();
+
+                    interseccion.setCabecera(conjuntosCombinados.interseccion(conjuntoA, conjuntoB));
+                    interseccion.mostrar(interseccion, "A ∩ B = C");
                     break;
                 case 8:
                     // Igualdad
-                    if(!conjuntoA.isVacio(conjuntoA)){ 
-                        conjuntosCombinados.igualacion(conjuntoA, conjuntoB);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡Verifique que los dos conjuntos tengan elementos", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
-                        conjuntoA.mostrar(conjuntoA, "A");
-                        conjuntoB.mostrar("B", null, null);
-                    }
+                    ConjuntosCombinados igualdad = new ConjuntosCombinados();
+
+                    igualdad.igualdad(conjuntoA, conjuntoB);
                     break;
                 case 9:
                     // Complemento
-                    String respuestaComplemento = JOptionPane.showInputDialog(null, "Ingrese el conjunto para hallar su complemento(A/B)", TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
-                    if(respuestaComplemento.equals("A") || respuestaComplemento.equals("a")){
-                        if(!conjuntoA.isVacio(conjuntoA)){
-                            conjuntoListaComplementoA.setCabecera(conjuntoListaComplementoA.complemento(conjuntoA, "A"));
-                            conjuntoListaComplementoA.mostrar(conjuntoListaComplementoA, "A<sup>C</sup>");
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'A' !\nA = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else if(respuestaComplemento.equals("B") || respuestaComplemento.equals("b")){
-                        if(conjuntoB.conjuntos.get("B") != null){
-                            conjuntoB.obtenerComplemento("B");
-                            conjuntoB.mostrar("Complemento", "B", null);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡No existe el conjunto 'B' !\nB = ∅", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);                          
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaComplemento+"' no existe!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE); 
+                    ConjuntoLista complemento = new ConjuntoLista();
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            complemento.setCabecera(conjuntosCombinados.complemento(conjuntoA, null));
+                            complemento.mostrar(complemento, "A<sup>C</sup>");
+                        case 2:
+                            complemento.setCabecera(conjuntosCombinados.complemento(null, conjuntoB));
+                            complemento.mostrar(complemento, "B<sup>C</sup>");
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
                     }
                     break;
                 case 10:
@@ -595,33 +582,17 @@ public class Conjuntos {
                     break;
                 case 11:
                     // Diferencia
-                    if(!conjuntoA.isVacio(conjuntoA) && conjuntoB.conjuntos.get("B") != null){ 
-                        String respuestaDiferencia = JOptionPane.showInputDialog(null, "Ingrese el conjunto para hallar la diferencia(A/B)", TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
-                        if(respuestaDiferencia.equals("A") || respuestaDiferencia.equals("a")){
-                                conjuntoListaDiferenciaA.setCabecera(conjuntosCombinados.diferencia(conjuntoA, conjuntoB, true));
-                                conjuntoListaDiferenciaA.mostrar(conjuntoListaDiferenciaA, "A - B");
-                        }else if(respuestaDiferencia.equals("B") || respuestaDiferencia.equals("b")){
-                                conjuntoListaDiferenciaB.setCabecera(conjuntosCombinados.diferencia(conjuntoA, conjuntoB, false));
-                                conjuntoListaDiferenciaB.mostrar(conjuntoListaDiferenciaB, "B - A");  
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡El conjunto '"+respuestaDiferencia+"' no existe!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE); 
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos A & B tengan elementos", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
-                        conjuntoA.mostrar(conjuntoA, "A");
-                        conjuntoB.mostrar("B", null, null);
-                    }
+                    ConjuntoLista diferencia = new ConjuntoLista();
+
+                    diferencia.setCabecera(conjuntosCombinados.diferencia(conjuntoA, conjuntoB));
+                    diferencia.mostrar(diferencia, "A - B");
                     break;
                 case 12:
                     // Diferencia Simétrica
-                    if(!conjuntoA.isVacio(conjuntoA) && conjuntoB.conjuntos.get("B") != null){ 
-                        conjuntoListaDiferenciaSimetrica.setCabecera(conjuntosCombinados.diferenciaSimetrica(conjuntoA, conjuntoB));
-                        conjuntoListaDiferenciaSimetrica.mostrar(conjuntoListaDiferenciaSimetrica, "A ∆ B");         
-                    }else{
-                        JOptionPane.showMessageDialog(null, "¡Verifique que los conjuntos A & B tengan elementos", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
-                        conjuntoA.mostrar(conjuntoA, "A");
-                        conjuntoB.mostrar("B", null, null);
-                    }
+                    ConjuntoLista diferenciaSimetrica = new ConjuntoLista();
+
+                    diferenciaSimetrica.setCabecera(conjuntosCombinados.diferenciaSimetria(conjuntoA, conjuntoB));
+                    diferenciaSimetrica.mostrar(diferenciaSimetrica, "A ∆ B");
                     break;
                 case 0:
                     System.exit(0);
