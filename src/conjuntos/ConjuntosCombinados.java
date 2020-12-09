@@ -30,4 +30,21 @@ public class ConjuntosCombinados {
 
         return conjuntoUnionC.getCabecera();
     }
+
+    public NodoConjuntoLista interseccion(ConjuntoLista conjuntoA, ConjuntoVector conjuntoB) {
+        NodoConjuntoLista conjunto = conjuntoA.getCabecera();
+        ConjuntoLista conjuntoInterseccion = new ConjuntoLista();
+
+        while(conjuntoA != null){
+            for (int i = 0; i < conjuntoB.conjuntos.get("B").length; i++) {
+                if (conjunto.getDato().equals(conjuntoB.conjuntos.get("B")[i])) {
+                    conjuntoInterseccion.almacenarDato(conjunto.getDato(), "C");
+                }
+            }
+
+            conjunto = conjunto.getLiga();
+        }
+
+        return conjuntoInterseccion.getCabecera();
+    }
 }

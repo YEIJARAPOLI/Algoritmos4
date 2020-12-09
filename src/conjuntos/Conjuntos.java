@@ -547,6 +547,10 @@ public class Conjuntos {
                     break;
                 case 7:
                     // Intersección
+                    ConjuntoLista interseccion = new ConjuntoLista();
+
+                    interseccion.setCabecera(conjuntosCombinados.interseccion(conjuntoA, conjuntoB));
+                    interseccion.mostrar(interseccion, "A ∩ B = C");
                     break;
                 case 8:
                     // Igualdad
