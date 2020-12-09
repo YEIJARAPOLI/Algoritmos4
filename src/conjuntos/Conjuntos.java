@@ -430,6 +430,7 @@ public class Conjuntos {
      private void menuCombinado() {
         ConjuntoLista conjuntoA = new ConjuntoLista();
         ConjuntoVector conjuntoB = new ConjuntoVector();
+        ConjuntosCombinados conjuntosCombinados = new ConjuntosCombinados();
 
         String menu = TITLE_MENU_COMBINADO
                 + "\n" +
@@ -539,6 +540,10 @@ public class Conjuntos {
                     break;
                 case 6:
                     // Union
+                    ConjuntoLista union = new ConjuntoLista();
+
+                    union.setCabecera(conjuntosCombinados.union(conjuntoA, conjuntoB));
+                    union.mostrar(union, "A ∪ B = C");
                     break;
                 case 7:
                     // Intersección
