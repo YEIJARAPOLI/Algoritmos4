@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ConjuntoVector {
 
-    Map<String, Integer[]> conjuntos;
+    Map<String, String[]> conjuntos;
 
     public ConjuntoVector() {
         conjuntos = new HashMap<>();
@@ -22,14 +22,14 @@ public class ConjuntoVector {
     }
 
     private void asignarConjuntoUniversal() {
-        conjuntos.put("Universal", new Integer[]{ 30, 5, 3, 7, 45, 0, 6 });
+        conjuntos.put("Universal", new String[]{ "Colombia", "Londres", "Estados Unidos de America", "Perú", "Brasil" });
     }
 
     public String[] agregar(String nombreConjunto) {
         String respuesta = "S";
 
         while (respuesta.equalsIgnoreCase("S")) {
-            Integer dato = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese elemento al conjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE));
+            String dato = JOptionPane.showInputDialog(null, "Ingrese elemento al conjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
 
             if (this.almacenarDato(dato, nombreConjunto)) {
                 JOptionPane.showMessageDialog(null, "¡El elemento '" + dato + "' ya esta asignado al conjunto '" + nombreConjunto + "' o al Universal!", "*** CONJUNTOS VECTORES ***", JOptionPane.ERROR_MESSAGE);
@@ -41,16 +41,10 @@ public class ConjuntoVector {
         return null;
     }
 
-    private boolean almacenarDato(Integer dato, String nombreConjunto) {
-        /*for (int i = 0; i < conjuntos.get("Universal").length; i++) {
-            if (conjuntos.get("Universal")[i] == dato) {
-                return true;
-            }
-        }*/
-
+    private boolean almacenarDato(String dato, String nombreConjunto) {
         if (conjuntos != null && conjuntos.containsKey(nombreConjunto)) {
             boolean existe = false;
-            Integer[] tmp = conjuntos.get(nombreConjunto);
+            String[] tmp = conjuntos.get(nombreConjunto);
 
             for (int i = 0; i < tmp.length; i++) {
                 if (tmp[i].equals(dato)) {
@@ -62,7 +56,7 @@ public class ConjuntoVector {
             }
 
             if (!existe) {
-                Integer[] tmp2 = new Integer[tmp.length + 1];
+                String[] tmp2 = new String[tmp.length + 1];
 
                 for (int i = 0; i < tmp.length; i++) {
                     tmp2[i] = tmp[i];
@@ -79,7 +73,7 @@ public class ConjuntoVector {
                 conjuntos = new HashMap<>();
             }
 
-            Integer[] tmp = new Integer[1];
+            String[] tmp = new String[1];
 
             tmp[0] = dato;
             conjuntos.put(nombreConjunto, tmp);
@@ -127,7 +121,7 @@ public class ConjuntoVector {
     public void borrarElemento(String nombreConjunto) {
         if (conjuntos != null) {
             if (conjuntos.containsKey(nombreConjunto)) {
-                Integer dato = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese elemento a eliminar del cnjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE));
+                String dato = JOptionPane.showInputDialog(null, "Ingrese elemento a eliminar del cnjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
                 boolean existe = false;
 
                 for (int i = 0; i < conjuntos.get(nombreConjunto).length; i++) {
@@ -141,7 +135,7 @@ public class ConjuntoVector {
 
                 if (existe) {
                     int contador = 0;
-                    Integer[] tmp = new Integer[conjuntos.get(nombreConjunto).length - 1];
+                    String[] tmp = new String[conjuntos.get(nombreConjunto).length - 1];
 
                     for (int i = 0; i < conjuntos.get(nombreConjunto).length; i++) {
                         if (!conjuntos.get(nombreConjunto)[i].equals(dato)) {
@@ -160,7 +154,7 @@ public class ConjuntoVector {
 
     public void vaciarElementos(String nombreConjunto) {
         if (conjuntos != null) {
-            conjuntos.replace(nombreConjunto, new Integer[0]);
+            conjuntos.replace(nombreConjunto, new String[0]);
         }
     }
 
@@ -173,8 +167,8 @@ public class ConjuntoVector {
     }
 
     public void union(String conjunto1, String conjunto2) {
-        Integer[] conjuntoUnion = null;
-        List<Integer> tmp = new ArrayList<>();
+        String[] conjuntoUnion = null;
+        List<String> tmp = new ArrayList<>();
 
         this.conjuntos.remove("Union");
 
@@ -182,40 +176,12 @@ public class ConjuntoVector {
             conjuntoUnion = conjuntos.get(conjunto1);
             conjuntoUnion = evaluarUnion(conjuntos.get(conjunto2), conjuntoUnion);
 
-            /*for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
-                for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
-                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
-                        break;
-                    }
-                }
-
-                tmp.add(conjuntos.get(conjunto1)[i]);
-            }
-
-            for (int i = 0; i < conjuntos.get(conjunto2).length; i++) {
-                for (int j = 0; j < tmp.size(); j++) {
-                    if (tmp.get(j) == conjuntos.get(conjunto2)[i]) {
-                        break;
-                    }
-                }
-
-                tmp.add(conjuntos.get(conjunto2)[i]);
-            }
-
-            if (tmp.size() > 0) {
-                conjuntoUnion = new Integer[tmp.size()];
-
-                for (int i = 0; i < tmp.size(); i++) {
-                    conjuntoUnion[i] = tmp.get(i);
-                }*/
-
-                this.conjuntos.put("Union", conjuntoUnion);
-            /*}*/
+            this.conjuntos.put("Union", conjuntoUnion);
         }
     }
 
-    private Integer[] evaluarUnion(Integer[] c1, Integer[] c2) {
-        Integer[] union = c2;
+    private String[] evaluarUnion(String[] c1, String[] c2) {
+        String[] union = c2;
 
         for (int i = 0; i < c1.length; i++) {
             boolean existe = false;
@@ -228,8 +194,8 @@ public class ConjuntoVector {
             }
 
             if (!existe) {
-                Integer[] tmp = union;
-                union = new Integer[union.length + 1];
+                String[] tmp = union;
+                union = new String[union.length + 1];
 
                 for (int k = 0; k < tmp.length; k++) {
                     union[k] = tmp[k];
@@ -243,8 +209,8 @@ public class ConjuntoVector {
     }
 
     public void interseccion(String conjunto1, String conjunto2) {
-        Integer[] conjuntoInterseccion = null;
-        List<Integer> tmp = new ArrayList<>();
+        String[] conjuntoInterseccion = null;
+        List<String> tmp = new ArrayList<>();
 
         this.conjuntos.remove("Interseccion");
 
@@ -259,7 +225,7 @@ public class ConjuntoVector {
             }
 
             if (tmp.size() > 0) {
-                conjuntoInterseccion = new Integer[tmp.size()];
+                conjuntoInterseccion = new String[tmp.size()];
 
                 for (int i = 0; i < tmp.size(); i++) {
                     conjuntoInterseccion[i] = tmp.get(i);
@@ -300,7 +266,7 @@ public class ConjuntoVector {
     }
 
     public void obtenerComplemento(String conjunto) {
-        Integer[] complemento = new Integer[0];
+        String[] complemento = new String[0];
         this.conjuntos.remove("Complemento");
 
         if (conjuntos != null && conjuntos.containsKey(conjunto)) {
@@ -321,8 +287,8 @@ public class ConjuntoVector {
                 }
 
                 if (!existe) {
-                    Integer[] tmp = complemento;
-                    complemento = new Integer[complemento.length + 1];
+                    String[] tmp = complemento;
+                    complemento = new String[complemento.length + 1];
 
                     for (int k = 0; k < tmp.length; k++) {
                         complemento[k] = tmp[k];
@@ -337,7 +303,7 @@ public class ConjuntoVector {
     }
 
     public void obtenerDiferencia(String conjunto1, String conjunto2) {
-        Integer[] conjuntoDiferencia = new Integer[0];
+        String[] conjuntoDiferencia = new String[0];
         this.conjuntos.remove("Diferencia");
 
         if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
@@ -352,8 +318,8 @@ public class ConjuntoVector {
                 }
 
                 if (!existe) {
-                    Integer[] tmp = conjuntoDiferencia;
-                    conjuntoDiferencia = new Integer[conjuntoDiferencia.length + 1];
+                    String[] tmp = conjuntoDiferencia;
+                    conjuntoDiferencia = new String[conjuntoDiferencia.length + 1];
 
                     for (int k = 0; k < tmp.length; k++) {
                         conjuntoDiferencia[k] = tmp[k];
@@ -368,8 +334,8 @@ public class ConjuntoVector {
     }
 
     public void obtenerDiferenciaSimetrica(String conjunto1, String conjunto2) {
-        Integer[] conjuntoDiferenciaSimetrica = new Integer[0];
-        Integer[] tmpConjunto2;
+        String[] conjuntoDiferenciaSimetrica = new String[0];
+        String[] tmpConjunto2;
         this.conjuntos.remove("Diferencia-Simetrica");
 
         if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
@@ -387,8 +353,8 @@ public class ConjuntoVector {
                 }
 
                 if (!existe) {
-                    Integer[] tmp = conjuntoDiferenciaSimetrica;
-                    conjuntoDiferenciaSimetrica = new Integer[conjuntoDiferenciaSimetrica.length + 1];
+                    String[] tmp = conjuntoDiferenciaSimetrica;
+                    conjuntoDiferenciaSimetrica = new String[conjuntoDiferenciaSimetrica.length + 1];
 
                     for (int k = 0; k < tmp.length; k++) {
                         conjuntoDiferenciaSimetrica[k] = tmp[k];
@@ -401,8 +367,8 @@ public class ConjuntoVector {
             if (tmpConjunto2.length > 0) {
                 for (int j = 0; j < tmpConjunto2.length; j++) {
                     if (tmpConjunto2[j] != null) {
-                        Integer[] tmp = conjuntoDiferenciaSimetrica;
-                        conjuntoDiferenciaSimetrica = new Integer[conjuntoDiferenciaSimetrica.length + 1];
+                        String[] tmp = conjuntoDiferenciaSimetrica;
+                        conjuntoDiferenciaSimetrica = new String[conjuntoDiferenciaSimetrica.length + 1];
 
                         for (int k = 0; k < tmp.length; k++) {
                             conjuntoDiferenciaSimetrica[k] = tmp[k];
