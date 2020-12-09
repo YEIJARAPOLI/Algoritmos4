@@ -428,44 +428,114 @@ public class Conjuntos {
     }
     
      private void menuCombinado() {
-        ConjuntoLista conjuntoListaA = new ConjuntoLista();
+        ConjuntoLista conjuntoA = new ConjuntoLista();
+        ConjuntoVector conjuntoB = new ConjuntoVector();
+
         String menu = TITLE_MENU_COMBINADO
                 + "\n" +
-                "\n 1. Agregar conjunto A Lista" +
-                "\n 2. Agregar conjunto B Vector" +
-                "\n 3. Mostrar" +
-                "\n 4. Borrar " +
-                "\n 5. Vaciar" +
-                "\n 6. Cantidad Elementos" +
-                "\n 7. Unión" +
-                "\n 8. Intersección" +
-                "\n 9. Igualdad" +
-                "\n 10. Complemento" +
-                "\n 11. Posición" +
-                "\n 12. Diferencia" +
-                "\n 13. Diferencia Simétrica" +
+                "\n 1. Agregar" +
+                "\n 2. Mostrar" +
+                "\n 3. Borrar " +
+                "\n 4. Vaciar" +
+                "\n 5. Cantidad Elementos" +
+                "\n 6. Unión" +
+                "\n 7. Intersección" +
+                "\n 8. Igualdad" +
+                "\n 9. Complemento" +
+                "\n 10. Posición" +
+                "\n 11. Diferencia" +
+                "\n 12. Diferencia Simétrica" +
                 "\n" +
                 "\n 0. SALIR";
+
+        String menuConjuntos = TITLE_MENU_COMBINADO
+                + "\n" +
+                "\n 1. Conjunto A" +
+                "\n 2. Conjunto B" +
+                "\n" +
+                "\n 0. SALIR";
+
+        Integer opcionConjunto;
+
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 
             switch (opcion) {
                 case 1:
                     // Agregar
-                    conjuntoListaA.agregar("A");
-                    conjuntoListaA.mostrar(conjuntoListaA, "A");
+                    // Se agregan los valores al conjunto A
+                    conjuntoA.agregar("A");
+                    conjuntoA.mostrar(conjuntoA, "A");
+
+                    // Se agregan los valores al conjunto B
+                    conjuntoB.agregar("B");
+                    conjuntoB.mostrar("B", null, null);
                     break;
                 case 2:
                     // Mostrar
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.mostrar(conjuntoA, "A");
+                        case 2:
+                            conjuntoB.mostrar("B", null, null);
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 3:
                     // Borrar
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.borrarElemento(conjuntoA, "A");
+                        case 2:
+                            conjuntoB.borrarElemento("B");
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 4:
                     // Vaciar
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            conjuntoA.vaciarElementos(conjuntoA, "A");
+                        case 2:
+                            conjuntoB.vaciarElementos("B");
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 5:
                     // Cantidad Elementos
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'A' son: "
+                                    + conjuntoA.cantidadElementos(conjuntoA), TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
+                        case 2:
+                            JOptionPane.showMessageDialog(null, "La cantidad de elementos del conjunto 'B' son: "
+                                    + conjuntoB.cantidadElementos("B"), TITLE_MENU_COMBINADO, JOptionPane.INFORMATION_MESSAGE);
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 6:
                     // Union

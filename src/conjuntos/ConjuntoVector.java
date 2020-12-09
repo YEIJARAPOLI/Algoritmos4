@@ -121,7 +121,7 @@ public class ConjuntoVector {
     public void borrarElemento(String nombreConjunto) {
         if (conjuntos != null) {
             if (conjuntos.containsKey(nombreConjunto)) {
-                String dato = JOptionPane.showInputDialog(null, "Ingrese elemento a eliminar del cnjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
+                String dato = JOptionPane.showInputDialog(null, "Ingrese elemento a eliminar del conjunto: '" + nombreConjunto + "'", "*** CONJUNTOS VECTORES ***", JOptionPane.INFORMATION_MESSAGE);
                 boolean existe = false;
 
                 for (int i = 0; i < conjuntos.get(nombreConjunto).length; i++) {
