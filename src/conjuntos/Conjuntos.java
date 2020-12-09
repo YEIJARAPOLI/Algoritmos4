@@ -554,18 +554,45 @@ public class Conjuntos {
                     break;
                 case 8:
                     // Igualdad
+                    ConjuntosCombinados igualdad = new ConjuntosCombinados();
+
+                    igualdad.igualdad(conjuntoA, conjuntoB);
                     break;
                 case 9:
                     // Complemento
+                    ConjuntoLista complemento = new ConjuntoLista();
+                    opcionConjunto = Integer.parseInt(JOptionPane.showInputDialog(menuConjuntos));
+
+                    switch (opcionConjunto) {
+                        case 1:
+                            complemento.setCabecera(conjuntosCombinados.complemento(conjuntoA, null));
+                            complemento.mostrar(complemento, "A<sup>C</sup>");
+                        case 2:
+                            complemento.setCabecera(conjuntosCombinados.complemento(null, conjuntoB));
+                            complemento.mostrar(complemento, "B<sup>C</sup>");
+                        case 0:
+                            menuCombinado();
+                        default:
+                            JOptionPane.showMessageDialog(null, "¡OPCIÓN INCORRECTA!", TITLE_MENU_COMBINADO, JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
                     break;
                 case 10:
                     // Posiciòn
                     break;
                 case 11:
                     // Diferencia
+                    ConjuntoLista diferencia = new ConjuntoLista();
+
+                    diferencia.setCabecera(conjuntosCombinados.diferencia(conjuntoA, conjuntoB));
+                    diferencia.mostrar(diferencia, "A - B");
                     break;
                 case 12:
                     // Diferencia Simétrica
+                    ConjuntoLista diferenciaSimetrica = new ConjuntoLista();
+
+                    diferenciaSimetrica.setCabecera(conjuntosCombinados.diferenciaSimetria(conjuntoA, conjuntoB));
+                    diferenciaSimetrica.mostrar(diferenciaSimetrica, "A ∆ B");
                     break;
                 case 0:
                     System.exit(0);

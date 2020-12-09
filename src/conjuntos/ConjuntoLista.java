@@ -16,7 +16,15 @@ public class ConjuntoLista {
     public ConjuntoLista() {
         cabecera = null;
     }
-    
+
+    public NodoConjuntoLista getConjuntoUniversal() {
+        return conjuntoUniversal;
+    }
+
+    public void setConjuntoUniversal(NodoConjuntoLista conjuntoUniversal) {
+        this.conjuntoUniversal = conjuntoUniversal;
+    }
+
     public void llenarConjuntoUniversal() {
         NodoConjuntoLista conjuntoUniversal_Rojo = new NodoConjuntoLista("Rojo");
         NodoConjuntoLista conjuntoUniversal_Verde = new NodoConjuntoLista("Verde");
@@ -221,7 +229,7 @@ public class ConjuntoLista {
             conjuntoU = conjuntoU.getLiga();
         }
         return conjuntoComplemento.getCabecera();
-    } 
+    }
     
     public NodoConjuntoLista diferencia(ConjuntoLista conjuntoLista1, ConjuntoLista conjuntoLista2){
         NodoConjuntoLista conjunto1 = conjuntoLista1.getCabecera();
