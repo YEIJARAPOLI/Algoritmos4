@@ -591,7 +591,7 @@ public class Conjuntos {
                     // Diferencia Simétrica
                     ConjuntoLista diferenciaSimetrica = new ConjuntoLista();
 
-                    diferenciaSimetrica.setCabecera(conjuntosCombinados.diferenciaSimetria(conjuntoA, conjuntoB));
+                    diferenciaSimetrica.setCabecera(conjuntosCombinados.diferenciaSimetrica(conjuntoA, conjuntoB));
                     diferenciaSimetrica.mostrar(diferenciaSimetrica, "A ∆ B");
                     break;
                 case 0:

@@ -20,7 +20,7 @@ public class ConjuntoVector {
         conjuntos = new HashMap<>();
         asignarConjuntoUniversal();
     }
-
+    
     public Map<String, String[]> getConjuntos() {
         return conjuntos;
     }

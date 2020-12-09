@@ -75,7 +75,7 @@ public class ConjuntosCombinados {
 
         return conjuntoInterseccion.getCabecera();
     }
-
+    
     public void igualdad(ConjuntoLista conjuntoA, ConjuntoVector conjuntoB) {
         NodoConjuntoLista conjunto = conjuntoA.getCabecera();
 
@@ -184,7 +184,7 @@ public class ConjuntosCombinados {
         return conjuntoDiferencia.getCabecera();
     }
 
-    public NodoConjuntoLista diferenciaSimetria(ConjuntoLista conjuntoA, ConjuntoVector conjuntoB) {
+    public NodoConjuntoLista diferenciaSimetrica(ConjuntoLista conjuntoA, ConjuntoVector conjuntoB) {
         NodoConjuntoLista conjunto = conjuntoA.getCabecera();
         ConjuntoLista diferenciaSimetrica = new ConjuntoLista();
         boolean encontrado = true;
