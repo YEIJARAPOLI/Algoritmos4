@@ -94,7 +94,7 @@ public class ConjuntoVector {
         if (conjuntos != null && nombreConjunto != null && conjuntos.containsKey(nombreConjunto)) {
             String salida = "";
 
-            if (c1 == null || c1.isEmpty() || c2 == null || c2.isEmpty()) {
+            if ((c1 == null || c1.isEmpty()) && (c2 == null || c2.isEmpty())) {
                 salida = "<html>" + nombreConjunto + " = { ";
             } else {
                 if (nombreConjunto.equals("Union")) {
@@ -195,7 +195,7 @@ public class ConjuntoVector {
             boolean existe = false;
 
             for (int j = 0; j < c2.length; j++) {
-                if (c1[i] == c2[j]) {
+                if (c1[i].equals(c2[j])) {
                     existe = true;
                     break;
                 }
@@ -225,7 +225,7 @@ public class ConjuntoVector {
         if (conjuntos != null && conjuntos.containsKey(conjunto1) && conjuntos.containsKey(conjunto2)) {
             for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
                 for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
-                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                    if (conjuntos.get(conjunto1)[i].equals(conjuntos.get(conjunto2)[j])) {
                         tmp.add(conjuntos.get(conjunto1)[i]);
                         break;
                     }
@@ -253,7 +253,7 @@ public class ConjuntoVector {
 
                 for (int i = 0; i < conjuntos.get(conjunto1).length; i++) {
                     for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
-                        if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                        if (conjuntos.get(conjunto1)[i].equals(conjuntos.get(conjunto2)[j])) {
                             esIgual = true;
                             break;
                         } else {
@@ -286,7 +286,7 @@ public class ConjuntoVector {
                 boolean existe = false;
 
                 for (int j = 0; j < conjuntos.get(conjunto).length; j++) {
-                    if (conjuntos.get("Universal")[i] == conjuntos.get(conjunto)[j]) {
+                    if (conjuntos.get("Universal")[i].equals(conjuntos.get(conjunto)[j])) {
                         existe = true;
                         break;
                     } else {
@@ -319,7 +319,7 @@ public class ConjuntoVector {
                 boolean existe = false;
 
                 for (int j = 0; j < conjuntos.get(conjunto2).length; j++) {
-                    if (conjuntos.get(conjunto1)[i] == conjuntos.get(conjunto2)[j]) {
+                    if (conjuntos.get(conjunto1)[i].equals(conjuntos.get(conjunto2)[j])) {
                         existe = true;
                         break;
                     }
@@ -353,7 +353,7 @@ public class ConjuntoVector {
                 boolean existe = false;
 
                 for (int j = 0; j < tmpConjunto2.length; j++) {
-                    if (tmpConjunto2[j] != null && conjuntos.get(conjunto1)[i] == tmpConjunto2[j]) {
+                    if (tmpConjunto2[j] != null && conjuntos.get(conjunto1)[i].equals(tmpConjunto2[j])) {
                         existe = true;
                         tmpConjunto2[j] = null;
                         break;

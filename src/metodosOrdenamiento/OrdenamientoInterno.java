@@ -90,8 +90,26 @@ public class OrdenamientoInterno {
         }
     }
 
-    public Integer[] burbuja(Integer[] copiaVectorBurbuja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void burbuja(Integer[] copiaVectorBurbuja) {
+        Integer tmp;
+        long tiempoInicio, tiempoFin;
+
+        tiempoInicio = System.nanoTime();
+
+        for (int i = 0; i < (copiaVectorBurbuja.length - 1); i++) {
+            for (int j = 0; j < (copiaVectorBurbuja.length - 1); j++) {
+                if (copiaVectorBurbuja[j] > copiaVectorBurbuja[j + 1]) { // Si numeroActual > numeroSiguiente
+                    tmp = copiaVectorBurbuja[j];
+                    copiaVectorBurbuja[j] = copiaVectorBurbuja[j + 1];
+                    copiaVectorBurbuja[j + 1] = tmp;
+                }
+            }
+        }
+
+        tiempoFin = System.nanoTime();
+
+        // Mostrando el arreglo ordenado
+        mostrar(copiaVectorBurbuja, (tiempoFin - tiempoInicio));
     }
 
     public Integer[] shellSort(Integer[] copiaVectorShellSort) {
