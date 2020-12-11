@@ -7,14 +7,14 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class EjecucionMetodos {
+public class Ordenamientos {
     final static String TITLE_MENU = "*** METÓDOS DE ORDENAMIENTO ***"; 
     
     public static void main(String[] args) {
-        
         OrdenamientoInterno ordenamiento = new OrdenamientoInterno();
         int tamanoVector = 0;
         Integer[] vector = null;
+
         String menu = TITLE_MENU
                 + "\n"
                 + "\n  1. Insertar Vector"
@@ -24,9 +24,10 @@ public class EjecucionMetodos {
                 + "\n  5. Método Burbuja"
                 + "\n  6. Método Shell Sort"
                 + "\n  7. Método Raddix Sort"
-                
+                + "\n"
                 + "\n  0. SALIR";
         int opcion;
+
         do{
             opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
             switch(opcion){

@@ -112,14 +112,60 @@ public class OrdenamientoInterno {
         mostrar(copiaVectorBurbuja, (tiempoFin - tiempoInicio));
     }
 
-    public Integer[] shellSort(Integer[] copiaVectorShellSort) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void shellSort(Integer[] copiaVectorShellSort) {
+        long tiempoInicio, tiempoFin;
+
+        tiempoInicio = System.nanoTime();
+
+        for (int increment = copiaVectorShellSort.length / 2; increment > 0; increment = (increment == 2) ? 1 : (int) Math.round(increment / 2.2)) {
+            for (int i = increment; i < copiaVectorShellSort.length; i++) {
+                for (int j = i; j >= increment && copiaVectorShellSort[j - increment] > copiaVectorShellSort[j]; j -= increment) {
+                    int tmp = copiaVectorShellSort[j];
+
+                    copiaVectorShellSort[j] = copiaVectorShellSort[j - increment];
+                    copiaVectorShellSort[j - increment] = tmp;
+                }
+            }
+        }
+
+        tiempoFin = System.nanoTime();
+
+        // Mostrando el arreglo ordenado
+        mostrar(copiaVectorShellSort, (tiempoFin - tiempoInicio));
     }
 
-    public Integer[] raddixSort(Integer[] copiaVectorRaddixSort) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void raddixSort(Integer[] copiaVectorRaddixSort) {
+        int j;
+        long tiempoInicio, tiempoFin;
+
+        tiempoInicio = System.nanoTime();
+
+        for (int x = Integer.SIZE - 1; x >= 0; x--) {
+            Integer tmp[] = new Integer[copiaVectorRaddixSort.length];
+
+            j = 0;
+
+            for (int i = 0; i < copiaVectorRaddixSort.length; i++) {
+                boolean mover = copiaVectorRaddixSort[i] << x >= 0;
+
+                if (x == 0 ? !mover : mover) {
+                    tmp[j] = copiaVectorRaddixSort[i];
+                    j++;
+                } else {
+                    copiaVectorRaddixSort[i - j] = copiaVectorRaddixSort[i];
+                }
+            }
+
+            for (int i = j; i < copiaVectorRaddixSort.length; i++) {
+                tmp[i] = copiaVectorRaddixSort[i - j];
+            }
+
+            copiaVectorRaddixSort = tmp;
+        }
+
+        tiempoFin = System.nanoTime();
+
+        // Mostrando el arreglo ordenado
+        mostrar(copiaVectorRaddixSort, (tiempoFin - tiempoInicio));
     }
-
-
-
 }
