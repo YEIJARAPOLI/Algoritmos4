@@ -1,6 +1,7 @@
 package metodosOrdenamiento;
 
 import java.util.Date;
+import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,9 +25,11 @@ public class OrdenamientoInterno {
         }
         return vector;
     }
-
+   
     public void mostrar(Integer[] vector, long tiempoTotalEjecucion) {
         Date Date = new Date(tiempoTotalEjecucion);
+        long segundos = TimeUnit.NANOSECONDS.convert(Date.getTime(), TimeUnit.MILLISECONDS);     
+        
         String salida = "Vector = [ ";
         for (int i = 0; i < vector.length; i++) {
             if(tamanoVector-1 == i){
@@ -39,15 +42,95 @@ public class OrdenamientoInterno {
             JOptionPane.showMessageDialog(null, salida+" ]", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, salida+" ]\n"
-                    + "\nY el tiempo de ejecución fue de: "+Date.getTime()+" nanosegundos.", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
+                    + "\nY el tiempo de ejecución fue de: "+Date.getTime()+" nanosegundos. ", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE);
         }
         
     }
 
-    public Integer[] timSort(Integer[] copiaVectorTimSort) {
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public  void timSort(Integer[] copiaVectorTimSort) {
+        long tiempoInicio, tiempoFin;
+        tiempoInicio = System.nanoTime();
+                
+        int tamanoV = copiaVectorTimSort.length;
+        int tamanoSubV = 0;
+        if(tamanoV > 2048){
+            tamanoSubV = tamanoV / 1024;
+        }else{
+            tamanoSubV = 100;
+        }
+        for (int i = 0; i < tamanoV; i += tamanoSubV) {
+            timInsercion(copiaVectorTimSort, i, Math.min((i + tamanoSubV - 1), (tamanoV -1)));
+        }
+        for (int tamanoM = tamanoSubV; tamanoM < tamanoV; tamanoM = 2 * tamanoM) {
+            for (int izquierda = 0; izquierda < tamanoV; izquierda += 2 * tamanoM) {
+               int medio = izquierda + tamanoM - 1;
+               int derecha = Math.min((izquierda + 2 * tamanoM - 1), (tamanoV - 1));
+               if(medio <= derecha){
+                   timMerge(copiaVectorTimSort, izquierda, medio, derecha);
+               }
+            }
+        }
+        tiempoFin = System.nanoTime();
+        mostrar(copiaVectorTimSort, tiempoFin - tiempoInicio);
     }
+    
+    public static void timInsercion(Integer[] copiaVectorTimSort, int izquierda, int derecha){
+        for (int i = izquierda + 1; i <= derecha; i++) {
+            int intercambio = copiaVectorTimSort[i];
+            int j = i - 1;
+            while(copiaVectorTimSort[j] > intercambio && j >= izquierda){
+                copiaVectorTimSort[j+1] = copiaVectorTimSort[j];
+                j--;
+                if(j < 0){
+                    break;
+                }
+            }
+            copiaVectorTimSort[j+1] = intercambio;
+        }
+    }
+    
+    public static void timMerge(Integer[] copiaVectorTimSort, int izquierda, int medio, int derecha){
+        int tamanoIzq = medio - izquierda + 1;
+        int tamanoDer = derecha - medio;
+        Integer[] tempIzq = new Integer[tamanoIzq];
+        Integer[] tempDer = new Integer[tamanoDer];       
+        
+        for (int x = 0; x < tamanoIzq; x++) {
+            tempIzq[x] = copiaVectorTimSort[izquierda + x];
+        }
+        for (int x = 0; x < tamanoDer; x++) {
+            tempDer[x] = copiaVectorTimSort[medio + 1 + x];
+        }
+        
+        int i = 0;
+        int j = 0;
+        int k = izquierda;
+        
+        while (i < tamanoIzq && j < tamanoDer){
+            if(tempIzq[i] <= tempDer[j]){
+                copiaVectorTimSort[k] = tempIzq[i];
+                i++;
+            }else{
+                copiaVectorTimSort[k] = tempDer[j];
+                j++;
+            }
+            k++;
+        }
+        
+        while (i < tamanoIzq){
+            copiaVectorTimSort[k] = tempIzq[i];
+            k++;
+            i++;
+        }
+        
+        while (j < tamanoDer){
+            copiaVectorTimSort[k] = tempDer[j];
+            k++;
+            j++;
+        }
+    }
+
+    
     
     public void ejecutarMetodoQuickSort(Integer[] copiaVectorQuickSort){
         //Las variables primero y ultimo son para calcular el pivote; es decir, donde se partirá el vector
@@ -62,6 +145,7 @@ public class OrdenamientoInterno {
         mostrar(copiaVectorQuickSort, tiempoTotal);
     }
     
+    /* Divide el vector en subvectores empezando con un pivote*/
     public void quickSort(Integer[] vector, int primero, int ultimo) {
         int i, j, central;
         double pivote;
@@ -168,4 +252,5 @@ public class OrdenamientoInterno {
         // Mostrando el arreglo ordenado
         mostrar(copiaVectorRaddixSort, (tiempoFin - tiempoInicio));
     }
+
 }

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class Ordenamientos {
-    final static String TITLE_MENU = "*** METÓDOS DE ORDENAMIENTO ***"; 
+    final static String TITLE_MENU = "*** MÉTODOS DE ORDENAMIENTO ***"; 
     
     public static void main(String[] args) {
         OrdenamientoInterno ordenamiento = new OrdenamientoInterno();
@@ -19,6 +19,7 @@ public class Ordenamientos {
                 + "\n"
                 + "\n  1. Insertar Vector"
                 + "\n  2. Mostrar Vector"
+                + "\n"
                 + "\n  3. Método Tim Sort"
                 + "\n  4. Método Quick Sort"
                 + "\n  5. Método Burbuja"
