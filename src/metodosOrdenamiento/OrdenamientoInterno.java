@@ -26,6 +26,12 @@ public class OrdenamientoInterno {
         return vector;
     }
    
+    public Integer[] insertarVectorFast(Integer[] newVector) {
+       vector = newVector;  
+       tamanoVector = newVector.length;
+       return vector;
+    }
+    
     public void mostrar(Integer[] vector, long tiempoTotalEjecucion) {
         Date Date = new Date(tiempoTotalEjecucion);
         long segundos = TimeUnit.NANOSECONDS.convert(Date.getTime(), TimeUnit.MILLISECONDS);     
@@ -130,8 +136,6 @@ public class OrdenamientoInterno {
         }
     }
 
-    
-    
     public void ejecutarMetodoQuickSort(Integer[] copiaVectorQuickSort){
         //Las variables primero y ultimo son para calcular el pivote; es decir, donde se partirá el vector
         int primero = 0;

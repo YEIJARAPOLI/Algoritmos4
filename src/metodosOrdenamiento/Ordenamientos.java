@@ -36,7 +36,17 @@ public class Ordenamientos {
                 case 1:
                     tamanoVector = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el tamaño del vector", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE));
                     vector = ordenamiento.insertarVector(tamanoVector);
+                    /*Integer vector[] = {15,248,67,8,16,398,47,27,12,777,
+                                     35,111,89,6,999,510,37,3,74,62,
+                                     58,567,44,30,28,19,409,1,603,88};*/
+                    
+                    vector = ordenamiento.insertarVectorFast(vector);
                     ordenamiento.mostrar(vector,0);
+                    /*
+                    El Tim Sort y el Quick Sort son los mas rapidos
+                    Luego sigue el shell sort
+                    y los mas lentos serían el burbuja y el raddix sort
+                    */
                     break;
                 //Mostrar
                 case 2:
@@ -57,7 +67,7 @@ public class Ordenamientos {
                     break; 
                 //Quick Sort
                 case 4:
-                    //V: 15,67,08,16,44,27,12,35 => 08,12,15,16,27,35,44,67
+                    //V: 15,67,8,16,44,27,12,35 => 08,12,15,16,27,35,44,67
                     if(vector != null){
                         Integer[] copiaVectorQuickSort = hacerCopiaVector(vector);
                         ordenamiento.ejecutarMetodoQuickSort(copiaVectorQuickSort); 
