@@ -1,6 +1,7 @@
 package metodosOrdenamiento;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 
@@ -18,10 +19,12 @@ public class OrdenamientoInterno {
     
     public Integer[] insertarVector(int tamanoVec) {
         tamanoVector = tamanoVec;
+        Random random = new Random();
         vector = new Integer[tamanoVec];  
         for (int i = 0; i < tamanoVec; i++) {
-            int dato = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un elemento al vector, en la posición ["+i+"]", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE));
-            vector[i] = dato;
+            //int dato = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un elemento al vector, en la posición ["+i+"]", TITLE_MENU, JOptionPane.INFORMATION_MESSAGE));
+            //vector[i] = dato;
+            vector[i] = random.nextInt(1000);
         }
         return vector;
     }
